@@ -1,0 +1,64 @@
+Block MODSEL      #  
+ 1 1               #  1/0: High/low scale input 
+ 2 1              # Boundary Condition  
+ 6 1               # Generation Mixing 
+Block SMINPUTS    # Standard Model inputs 
+ 2 1.166370E-05    # G_F,Fermi constant 
+ 3 1.187000E-01    # alpha_s(MZ) SM MSbar 
+ 4 9.118870E+01    # Z-boson pole mass 
+ 5 4.180000E+00    # m_b(mb) SM MSbar 
+ 6 1.728900E+02    # m_top(pole) 
+ 7 1.776690E+00    # m_tau(pole) 
+Block MINPAR      # Input parameters 
+ 1   2.5773379E-01    # Lambda1Input
+ 2   2.5773379E-01    # Lambda2Input
+ 3   2.5773379E-01    # Lambda3Input
+ 4   0.000000E+00    # Lambda4Input
+ 6   1.8050000E-02    # Lambda3ppInput
+ 7   0.000000E+00    # Lambda1pInput
+ 8   0.000000E+00    # Lambda2pInput
+ 5   3.2000000E+05    # M122Input
+ 9   -4.0000000E+04    # mSp2Input
+ 10   1.0000000E+00    # TanBeta
+ 11   5.0000000E+02    # vSInput
+ 12   1.0000000E+00    # zUrInput
+ 13   -1.0000000E+00    # zDrInput
+ 14   -1.0000000E+00    # zErInput
+ 15   0.000000E+00    # etaInput
+ 16   0.000000E+00    # zetaInput
+Block EXTPAR      # Input parameters 
+ 1 0.000000E+00    # Lambda1pprInput
+ 2 0.000000E+00    # Lambda2pprInput
+ 3 0.000000E+00    # Lambda3prInput
+ 4 0.000000E+00    # Lambda4prInput
+ 5 0.000000E+00    # Lambda5prInput
+ 6 0.000000E+00    # Lambda6prInput
+ 7 0.000000E+00    # Lambda7prInput
+ 8 0.000000E+00    # Lambda5rInput
+ 9 0.000000E+00    # Lambda6rInput
+ 10 0.000000E+00    # Lambda7rInput
+ 11 0.000000E+00    # Lambda1ppiInput
+ 12 0.000000E+00    # Lambda2ppiInput
+ 13 0.000000E+00    # Lambda3piInput
+ 14 0.000000E+00    # Lambda4piInput
+ 15 0.000000E+00    # Lambda5piInput
+ 16 0.000000E+00    # Lambda6piInput
+ 17 0.000000E+00    # Lambda7piInput
+ 18 0.000000E+00    # Lambda5iInput
+ 19 0.000000E+00    # Lambda6iInput
+ 20 0.000000E+00    # Lambda7iInput
+ 21 0.000000E+00    # mu11rInput
+ 22 0.000000E+00    # mu12rInput
+ 23 0.000000E+00    # mu21rInput
+ 24 0.000000E+00    # mu22rInput
+ 25 0.000000E+00    # mus1rInput
+ 26 0.000000E+00    # mus2rInput
+ 31 0.000000E+00    # mu11iInput
+ 32 0.000000E+00    # mu12iInput
+ 33 0.000000E+00    # mu21iInput
+ 34 0.000000E+00    # mu22iInput
+ 35 0.000000E+00    # mus1iInput
+ 36 0.000000E+00    # mus2iInput
+ 41 0.000000E+00    # zUiInput
+ 42 0.000000E+00    # zDiInput
+ 43 0.000000E+00    # zEiInput

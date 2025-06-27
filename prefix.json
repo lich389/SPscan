@@ -1,0 +1,20 @@
+{
+    "n":30,
+    "home":"/home/licheng/",
+    "scan":"Code/myscripts/sphenoscan2/",
+    "input_path":"/home/licheng/Code/myscripts/sphenoscan2/inputs/",
+    "input":"/home/licheng/Code/myscripts/sphenoscan2/inputs/input_2HDMS.json",
+    "SPheno":"/home/licheng/Code/SPheno-4.0.5/",
+    "micromega":"/home/licheng/Code/micromegas_5.2.13/complexZ2bDM/",
+    "hbdataset":"/home/licheng/Code/higgstools/htdataset/hbdataset/",
+    "hsdataset":"/home/licheng/Code/higgstools/htdataset/hsdataset/",
+    "evade":"/home/licheng/Code/EVADE/build/",
+    "print check": 0,
+    "unitarity check": 1,
+    "boundedness from below check": 1,
+    "ew precision check": 1,
+    "higgstools check": 1,
+    "flavor check": 1,
+    "evade check": 1,
+    "micromega check": 0
+}
