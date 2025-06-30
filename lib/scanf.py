@@ -82,6 +82,7 @@ def write_input(i_f, setup, i_lha):
     f_setup.close()
     return 0
 
+spset = 'SPhenoInput'
 
 def SP_run(srcf,n, out_add = init.out_add):
     ############# initialize ##############
@@ -116,7 +117,7 @@ def SP_run(srcf,n, out_add = init.out_add):
                 if lhinp['BLOCK']['EXTPAR']['values'][ip_p][0] == da_extp[parek]['pdg']:
                     lhinp['BLOCK']['EXTPAR']['values'][ip_p][1] = da_extp[parek]['value']
 
-    write_input('/dev/shm/LesHouches.in.'+model+str(n), inp_dir + 'SPhenoInput', lhinp)
+    write_input('/dev/shm/LesHouches.in.'+model+str(n), inp_dir + spset, lhinp)
     # print(lhinp)
 
     # Run SPheno
