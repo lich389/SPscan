@@ -89,7 +89,7 @@ def SP_run(srcf,n, out_add = init.out_add):
     inp_dir = init.inp_dir
     out_add = init.out_add
     sp_dir = init.sp_dir
-    srcf.initinp()
+    # srcf.initinp()
     da_inp = srcf.par.minpar
     da_extp = srcf.par.extpar
     model = srcf.spn
@@ -124,6 +124,7 @@ def SP_run(srcf,n, out_add = init.out_add):
     os.mkdir(out_add +'/' + str(n))
     os.chdir(out_add +'/'+ str(n))
     os.system(sp_dir+'bin/SPheno'+model+' '+'/dev/shm/LesHouches.in.'+model+str(n)+" | grep -q \"string\"")
+    os.system('mv '+'/dev/shm/LesHouches.in.'+model+str(n)+' '+out_add+'/' + str(n))
     # os.system('rm '+'/dev/shm/LesHouches.in.'+model+str(n))
     os.chdir(out_add)
     if not os.path.isfile(str(n)+"/SPheno.spc."+model):

@@ -1,0 +1,10 @@
+{{{bar[Fd], Fd, Cp[Uhh[{gO1}], bar[Fd[{gI1}]], Fd[{gI2}]], FFS, 3, 1/2}, 
+  {bar[Fe], Fe, Cp[Uhh[{gO1}], bar[Fe[{gI1}]], Fe[{gI2}]], FFS, 1, 1/2}, 
+  {bar[Fu], Fu, Cp[Uhh[{gO1}], bar[Fu[{gI1}]], Fu[{gI2}]], FFS, 3, 1/2}, 
+  {bar[gWm], gWm, Cp[Uhh[{gO1}], bar[gWm], gWm], GGS, 1, 1/2}, 
+  {bar[gWmC], gWmC, Cp[Uhh[{gO1}], bar[gWmC], gWmC], GGS, 1, 1/2}, 
+  {bar[gZ], gZ, Cp[Uhh[{gO1}], bar[gZ], gZ], GGS, 1, 1/2}, 
+  {hh, hh, Cp[Uhh[{gO1}], hh[{gI1}], hh[{gI2}]], SSS, 1, 1/4}, 
+  {conj[Hm], Hm, Cp[Uhh[{gO1}], conj[Hm[{gI1}]], Hm[{gI2}]], SSS, 1, 1/2}, 
+  {conj[VWm], VWm, Cp[Uhh[{gO1}], conj[VWm], VWm], SVV, 1, 1/2}, 
+  {VZ, VZ, Cp[Uhh[{gO1}], VZ, VZ], SVV, 1, 1/4}}}

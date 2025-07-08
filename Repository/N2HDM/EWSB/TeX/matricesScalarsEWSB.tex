@@ -1,0 +1,86 @@
+\subsection{Rotations in Mass sector for eigenstates {\tt 'EWSB'} } 
+\subsubsection{Mass Matrices for Scalars}
+\begin{itemize} 
+\item {\bf Mass matrix for Higgs}, Basis: \( \left(\phi_1, \phi_2, \phi_S\right), \left(\phi_1, \phi_2, \phi_S\right) \) 
+ 
+\begin{equation} 
+m^2_{h} = \left( 
+\begin{array}{ccc}
+m_{\phi_1\phi_1} &m_{\phi_2\phi_1} &\lambda_7 v_1 v_S \\ 
+m_{\phi_1\phi_2} &m_{\phi_2\phi_2} &\lambda_8 v_2 v_S \\ 
+\lambda_7 v_1 v_S  &\lambda_8 v_2 v_S  &m_{\phi_S\phi_S}\end{array} 
+\right) 
+ \end{equation} 
+\begin{align} 
+m_{\phi_1\phi_1} &= \frac{1}{2} \Big(3 \lambda_1 v_{1}^{2}  + \lambda_7 v_{S}^{2}  + v_{2}^{2} \Big(\lambda_3 + \lambda_4 + {\Re\Big(\lambda_5\Big)}\Big)\Big) + m^2_1\\ 
+m_{\phi_1\phi_2} &= \frac{1}{2} v_1 v_2 \Big(2 \Big(\lambda_3 + \lambda_4\Big) + 2 {\Re\Big(\lambda_5\Big)} \Big) - {\Re\Big(m_{12}\Big)} \\ 
+m_{\phi_2\phi_2} &= \frac{1}{2} \Big(3 \lambda_2 v_{2}^{2}  + \lambda_8 v_{S}^{2}  + v_{1}^{2} \Big(\lambda_3 + \lambda_4 + {\Re\Big(\lambda_5\Big)}\Big)\Big) + m^2_2\\ 
+m_{\phi_S\phi_S} &= \frac{1}{2} \Big(3 \lambda_6 v_{S}^{2}  + \lambda_7 v_{1}^{2}  + \lambda_8 v_{2}^{2} \Big) + m_S^2
+\end{align} 
+This matrix is diagonalized by \(Z^H\): 
+\begin{equation} 
+Z^H m^2_{h} Z^{H,\dagger} = m^{dia}_{2,h} 
+\end{equation} 
+with 
+\begin{align} 
+\phi_1 = \sum_{j}Z_{{j 1}}^{H}h_{{j}}\,, \hspace{1cm} 
+\phi_2 = \sum_{j}Z_{{j 2}}^{H}h_{{j}}\,, \hspace{1cm} 
+\phi_S = \sum_{j}Z_{{j 3}}^{H}h_{{j}}
+\end{align} 
+\item {\bf Mass matrix for Pseudo-Scalar Higgs}, Basis: \( \left(\sigma_1, \sigma_2\right), \left(\sigma_1, \sigma_2\right) \) 
+ 
+\begin{equation} 
+m^2_{A^0} = \left( 
+\begin{array}{cc}
+m_{\sigma_1\sigma_1} &- {\Re\Big(m_{12}\Big)}  + v_1 v_2 {\Re\Big(\lambda_5\Big)} \\ 
+- {\Re\Big(m_{12}\Big)}  + v_1 v_2 {\Re\Big(\lambda_5\Big)}  &m_{\sigma_2\sigma_2}\end{array} 
+\right) +  \xi_{Z}m^2(Z) 
+ \end{equation} 
+\begin{align} 
+m_{\sigma_1\sigma_1} &= \frac{1}{2} \Big(\lambda_1 v_{1}^{2}  + \lambda_7 v_{S}^{2}  + v_{2}^{2} \Big(- {\Re\Big(\lambda_5\Big)}  + \lambda_3 + \lambda_4\Big)\Big) + m^2_1\\ 
+m_{\sigma_2\sigma_2} &= \frac{1}{2} \Big(\lambda_2 v_{2}^{2}  + \lambda_8 v_{S}^{2}  + v_{1}^{2} \Big(- {\Re\Big(\lambda_5\Big)}  + \lambda_3 + \lambda_4\Big)\Big) + m^2_2
+\end{align} 
+Gauge fixing contributions: 
+\begin{equation} 
+m^2 (\xi_{Z}) = \left( 
+\begin{array}{cc}
+\frac{1}{4} v_{1}^{2} \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big)^{2}  &\frac{1}{4} v_1 v_2 \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big)^{2} \\ 
+\frac{1}{4} v_1 v_2 \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big)^{2}  &\frac{1}{4} v_{2}^{2} \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big)^{2} \end{array} 
+\right) 
+ \end{equation} 
+This matrix is diagonalized by \(Z^A\): 
+\begin{equation} 
+Z^A m^2_{A^0} Z^{A,\dagger} = m^{dia}_{2,A^0} 
+\end{equation} 
+with 
+\begin{align} 
+\sigma_1 = \sum_{j}Z_{{j 1}}^{A}A^0_{{j}}\,, \hspace{1cm} 
+\sigma_2 = \sum_{j}Z_{{j 2}}^{A}A^0_{{j}}
+\end{align} 
+\item {\bf Mass matrix for Charged Higgs}, Basis: \( \left(H_1^{+,*}, H_2^{+,*}\right), \left(H_1^+, H_2^+\right) \) 
+ 
+\begin{equation} 
+m^2_{H^-} = \left( 
+\begin{array}{cc}
+\frac{1}{2} \Big(\lambda_1 v_{1}^{2}  + \lambda_3 v_{2}^{2}  + \lambda_7 v_{S}^{2} \Big) + m^2_1 &\frac{1}{2} v_1 v_2 \Big(\lambda_4 + \lambda_5^*\Big) - m_{12}^* \\ 
+\frac{1}{2} \Big(\lambda_4 + \lambda_5\Big)v_1 v_2  - m_{12}  &\frac{1}{2} \Big(\lambda_2 v_{2}^{2}  + \lambda_3 v_{1}^{2}  + \lambda_8 v_{S}^{2} \Big) + m^2_2\end{array} 
+\right) +  \xi_{W^-}m^2(W^-) 
+ \end{equation} 
+Gauge fixing contributions: 
+\begin{equation} 
+m^2 (\xi_{W^-}) = \left( 
+\begin{array}{cc}
+\frac{1}{4} g_{2}^{2} v_{1}^{2}  &\frac{1}{4} g_{2}^{2} v_1 v_2 \\ 
+\frac{1}{4} g_{2}^{2} v_1 v_2  &\frac{1}{4} g_{2}^{2} v_{2}^{2} \end{array} 
+\right) 
+ \end{equation} 
+This matrix is diagonalized by \(Z^+\): 
+\begin{equation} 
+Z^+ m^2_{H^-} Z^{+,\dagger} = m^{dia}_{2,H^-} 
+\end{equation} 
+with 
+\begin{align} 
+H_1^+ = \sum_{j}Z_{{j 1}}^{+}H^+_{{j}}\,, \hspace{1cm} 
+H_2^+ = \sum_{j}Z_{{j 2}}^{+}H^+_{{j}}
+\end{align} 
+\end{itemize} 

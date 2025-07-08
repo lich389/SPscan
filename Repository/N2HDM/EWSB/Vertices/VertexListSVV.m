@@ -1,0 +1,12 @@
+{{{hh[{gt1}], conj[VWm[{lt2}]], VWm[{lt3}]}, 
+  {(I/2)*g2^2*(v1*ZH[gt1, 1] + v2*ZH[gt1, 2]), g[lt2, lt3]}}, 
+ {{hh[{gt1}], VZ[{lt2}], VZ[{lt3}]}, 
+  {(I/2)*(g2*Cos[ThetaW] + g1*Sin[ThetaW])^2*(v1*ZH[gt1, 1] + v2*ZH[gt1, 2]), 
+   g[lt2, lt3]}}, {{Hm[{gt1}], conj[VWm[{lt2}]], VP[{lt3}]}, 
+  {(I/2)*g1*g2*Cos[ThetaW]*(v1*ZP[gt1, 1] + v2*ZP[gt1, 2]), g[lt2, lt3]}}, 
+ {{Hm[{gt1}], conj[VWm[{lt2}]], VZ[{lt3}]}, 
+  {(-I/2)*g1*g2*Sin[ThetaW]*(v1*ZP[gt1, 1] + v2*ZP[gt1, 2]), g[lt2, lt3]}}, 
+ {{conj[Hm[{gt1}]], VP[{lt2}], VWm[{lt3}]}, 
+  {(I/2)*g1*g2*Cos[ThetaW]*(v1*ZP[gt1, 1] + v2*ZP[gt1, 2]), g[lt2, lt3]}}, 
+ {{conj[Hm[{gt1}]], VWm[{lt2}], VZ[{lt3}]}, 
+  {(-I/2)*g1*g2*Sin[ThetaW]*(v1*ZP[gt1, 1] + v2*ZP[gt1, 2]), g[lt2, lt3]}}}

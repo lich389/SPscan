@@ -1,0 +1,57 @@
+\section{Fields} 
+\subsection{Gauge Fields} 
+\begin{center} 
+\begin{tabular}{|c|c|c|c|} 
+\hline \hline 
+Name & \(SU(N)\) & Coupling & Name \\ 
+ \hline 
+\(B\) & \(U(1)\) & \(g_1\) &\text{hypercharge}\\ 
+\(W\) & \(\text{SU}(2)\) & \(g_2\) &\text{left}\\ 
+\(g\) & \(\text{SU}(3)\) & \(g_3\) &\text{color}\\ 
+\hline \hline
+\end{tabular} 
+\end{center} 
+\subsection{Matter Superfields} 
+\begin{center} 
+\begin{tabular}{|c|c|c|c|c|} 
+\hline \hline 
+Name & Spin  &  Generations & \((U(1)\otimes\, \text{SU}(2)\otimes\, \text{SU}(3))\) \\ 
+\hline 
+\(\text{H1}\) & \(0\)  & 1 & \((\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(\text{H2}\) & \(0\)  & 1 & \((\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(S\) & \(0\)  & 1 & \((0,{\bf 1},{\bf 1}) \) \\ 
+\(q\) & \(\frac{1}{2}\)  & 3 & \((\frac{1}{6},{\bf 2},{\bf 3}) \) \\ 
+\(l\) & \(\frac{1}{2}\)  & 3 & \((-\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(d\) & \(\frac{1}{2}\)  & 3 & \((\frac{1}{3},{\bf 1},{\bf \overline{3}}) \) \\ 
+\(u\) & \(\frac{1}{2}\)  & 3 & \((-\frac{2}{3},{\bf 1},{\bf \overline{3}}) \) \\ 
+\(e\) & \(\frac{1}{2}\)  & 3 & \((1,{\bf 1},{\bf 1}) \) \\ 
+\hline \hline
+\end{tabular} 
+\end{center} 
+\section{Lagrangian} 
+\subsection{Input Lagrangian for Eigenstates GaugeES} 
+\begin{align} 
+L = \, & -\frac{1}{2} m_S^2 S^{2} -\frac{1}{8} \lambda_6 S^{4} - m^2_1 |H_1^0|^2 -\frac{1}{2} \lambda_7 S^{2} |H_1^0|^2 - m^2_1 |H_1^+|^2 -\frac{1}{2} \lambda_7 S^{2} |H_1^+|^2 \nonumber \\ 
+ &- m^2_2 |H_2^0|^2 -\frac{1}{2} \lambda_8 S^{2} |H_2^0|^2 - m^2_2 |H_2^+|^2 -\frac{1}{2} \lambda_8 S^{2} |H_2^+|^2 -\frac{1}{2} \lambda_1 |H_1^0|^4 -\frac{1}{2} \lambda_1 |H_1^+|^4 \nonumber \\ 
+ &-\frac{1}{2} \lambda_2 |H_2^0|^4 -\frac{1}{2} \lambda_2 |H_2^+|^4 +H_2^0 m_{12} H_1^{0,*} -\frac{1}{2} H_{2}^{0,2} \lambda_5 H_{1}^{0,*,2} +H_2^+ m_{12} H_1^{+,*} - H_1^+ \lambda_1 |H_1^0|^2 H_1^{+,*} \nonumber \\ 
+ &- H_2^0 H_2^+ \lambda_5 H_1^{0,*} H_1^{+,*} -\frac{1}{2} H_{2}^{+,2} \lambda_5 H_{1}^{+,*,2} - H_2^0 \lambda_3 |H_1^0|^2 H_2^{0,*} - H_2^0 \lambda_4 |H_1^0|^2 H_2^{0,*} \nonumber \\ 
+ &- H_2^0 \lambda_3 |H_1^+|^2 H_2^{0,*} - H_1^0 H_2^+ \lambda_4 H_1^{+,*} H_2^{0,*} - H_2^+ \lambda_3 |H_1^0|^2 H_2^{+,*} - H_2^+ \lambda_3 |H_1^+|^2 H_2^{+,*} \nonumber \\ 
+ &- H_2^+ \lambda_4 |H_1^+|^2 H_2^{+,*} - H_2^+ \lambda_2 |H_2^0|^2 H_2^{+,*} - H_1^+ H_2^0 \lambda_4 H_1^{0,*} H_2^{+,*} -\frac{1}{2} H_{1}^{0,2} H_{2}^{0,*,2} \lambda_5^* \nonumber \\ 
+ &- H_1^0 H_1^+ H_2^{0,*} H_2^{+,*} \lambda_5^* -\frac{1}{2} H_{1}^{+,2} H_{2}^{+,*,2} \lambda_5^* +H_1^0 H_2^{0,*} m_{12}^* +H_1^+ H_2^{+,*} m_{12}^* \nonumber \\ 
+ &- H_1^0 d^*_{L,{k \gamma}} Y^*_{d,{j k}} \delta_{\beta \gamma} d_{R,{j \beta}} - H_1^+ u^*_{L,{k \gamma}} Y^*_{d,{j k}} \delta_{\beta \gamma} d_{R,{j \beta}} - H_1^0 e^*_{L,{k}} Y^*_{e,{j k}} e_{R,{j}} \nonumber \\ 
+ &- H_1^+ \nu^*_{L,{k}} Y^*_{e,{j k}} e_{R,{j}} +H_2^{+,*} d^*_{L,{k \gamma}} Y^*_{u,{j k}} \delta_{\beta \gamma} u_{R,{j \beta}} - H_2^{0,*} u^*_{L,{k \gamma}} Y^*_{u,{j k}} \delta_{\beta \gamma} u_{R,{j \beta}} \nonumber \\ 
+ &- H_1^{0,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} Y_{d,{j k}} - H_1^{+,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} u_{L,{k \gamma}} Y_{d,{j k}} - H_1^{0,*} e^*_{R,{j}} e_{L,{k}} Y_{e,{j k}} \nonumber \\ 
+ &- H_1^{+,*} e^*_{R,{j}} \nu_{L,{k}} Y_{e,{j k}} +H_2^+ u^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} Y_{u,{j k}} - H_2^0 u^*_{R,{j \beta}} \delta_{\beta \gamma} u_{L,{k \gamma}} Y_{u,{j k}} 
+\end{align} 
+\subsection{Gauge fixing terms} 
+\subsubsection{Gauge fixing terms for eigenstates {\tt 'GaugeES'} } 
+\begin{align} 
+L_{GF} = \, &-\frac{1}{2} |\partial_{\mu}B|^2 \xi_{B}^{-1}  -\frac{1}{2} |\partial_{\mu}g|^2 \xi_{g}^{-1}  -\frac{1}{2} |\partial_{\mu}W|^2 \xi_{W}^{-1} 
+\end{align} 
+\subsubsection{Gauge fixing terms for eigenstates {\tt 'EWSB'} } 
+\begin{align} 
+L_{GF} = \, &-\frac{1}{2} |\partial_{\mu}g|^2 \xi_{g}^{-1} -\frac{1}{2} |\partial_{\mu}\gamma|^2 \xi_{\gamma}^{-1} - |\frac{i}{2} g_2 \Big(v_1 H_1^{+,*}  + v_2 H_2^{+,*} \Big)\xi_{W^-}  + \partial_{\mu}W^-|^2 \xi_{W^-}^{-1} \nonumber \\ 
+ &-\frac{1}{2} |-\frac{1}{2} \Big(\sigma_1 v_1  + \sigma_2 v_2 \Big)\xi_{Z} \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big) + \partial_{\mu}Z|^2 \xi_{Z}^{-1} 
+\end{align} 
+\subsection{Fields integrated out} 
+None 

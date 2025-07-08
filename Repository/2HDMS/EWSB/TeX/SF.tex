@@ -1,0 +1,75 @@
+\section{Fields} 
+\subsection{Gauge Fields} 
+\begin{center} 
+\begin{tabular}{|c|c|c|c|} 
+\hline \hline 
+Name & \(SU(N)\) & Coupling & Name \\ 
+ \hline 
+\(B\) & \(U(1)\) & \(g_1\) &\text{hypercharge}\\ 
+\(W\) & \(\text{SU}(2)\) & \(g_2\) &\text{left}\\ 
+\(g\) & \(\text{SU}(3)\) & \(g_3\) &\text{color}\\ 
+\hline \hline
+\end{tabular} 
+\end{center} 
+\subsection{Matter Superfields} 
+\begin{center} 
+\begin{tabular}{|c|c|c|c|c|} 
+\hline \hline 
+Name & Spin  &  Generations & \((U(1)\otimes\, \text{SU}(2)\otimes\, \text{SU}(3))\) \\ 
+\hline 
+\(\text{H1}\) & \(0\)  & 1 & \((\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(\text{H2}\) & \(0\)  & 1 & \((\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(S\) & \(0\)  & 1 & \((0,{\bf 1},{\bf 1}) \) \\ 
+\(q\) & \(\frac{1}{2}\)  & 3 & \((\frac{1}{6},{\bf 2},{\bf 3}) \) \\ 
+\(l\) & \(\frac{1}{2}\)  & 3 & \((-\frac{1}{2},{\bf 2},{\bf 1}) \) \\ 
+\(d\) & \(\frac{1}{2}\)  & 3 & \((\frac{1}{3},{\bf 1},{\bf \overline{3}}) \) \\ 
+\(u\) & \(\frac{1}{2}\)  & 3 & \((-\frac{2}{3},{\bf 1},{\bf \overline{3}}) \) \\ 
+\(e\) & \(\frac{1}{2}\)  & 3 & \((1,{\bf 1},{\bf 1}) \) \\ 
+\hline \hline
+\end{tabular} 
+\end{center} 
+\section{Lagrangian} 
+\subsection{Input Lagrangian for Eigenstates GaugeES} 
+\begin{align} 
+L = \, & -\frac{1}{2} {m_{S}'}^2 \phi_{S}^{2} -\frac{1}{6} \mu_{S1} \phi_{S}^{3} -\frac{1}{24} \lambda_1'' \phi_{S}^{4} - m^2_{11} |\phi_1^0|^2 - \mu_{11} \phi_S |\phi_1^0|^2 - \lambda^{\prime}_4 \phi_{S}^{2} |\phi_1^0|^2 \nonumber \\ 
+ &- m^2_{11} |\chi_1^\pm|^2 - \mu_{11} \phi_S |\chi_1^\pm|^2 - \lambda^{\prime}_4 \phi_{S}^{2} |\chi_1^\pm|^2 - m^2_{22} |\phi_2^0|^2 - \mu_{22} \phi_S |\phi_2^0|^2 \nonumber \\ 
+ &- \lambda^{\prime}_5 \phi_{S}^{2} |\phi_2^0|^2 - m^2_{22} |\chi_2^\pm|^2 - \mu_{22} \phi_S |\chi_2^\pm|^2 - \lambda^{\prime}_5 \phi_{S}^{2} |\chi_2^\pm|^2 - m_{S}^2 |\phi_S|^2 -\frac{1}{2} \lambda_1 |\phi_1^0|^4 \nonumber \\ 
+ &-\frac{1}{2} \lambda_1 |\chi_1^\pm|^4 -\frac{1}{2} \lambda_2 |\phi_2^0|^4 -\frac{1}{2} \lambda_2 |\chi_2^\pm|^4 -\frac{1}{4} \lambda^{\prime\prime}_3 |\phi_S|^4 +\phi_2^0 m^2_{12} \phi_1^{0,*} - \phi_2^0 \mu_{12} \phi_S \phi_1^{0,*} - \phi_2^0 \lambda^{\prime}_6 \phi_{S}^{2} \phi_1^{0,*} \nonumber \\ 
+ &- \phi_2^0 \lambda_6 |\chi_1^\pm|^2 \phi_1^{0,*} - \phi_2^0 \lambda_7 |\chi_2^\pm|^2 \phi_1^{0,*} - \phi_2^0 \lambda^{\prime}_3 |\phi_S|^2 \phi_1^{0,*} - \phi_1^0 \phi_2^0 \lambda_6 \phi_{1}^{0,*,2} \nonumber \\ 
+ &+\chi_2^\pm m^2_{12} \chi_1^{\pm,*} - \chi_2^\pm \mu_{12} \phi_S \chi_1^{\pm,*} - \chi_2^\pm \lambda^{\prime}_6 \phi_{S}^{2} \chi_1^{\pm,*} - \chi_1^\pm \lambda_1 |\phi_1^0|^2 \chi_1^{\pm,*} - \chi_2^\pm \lambda_6 |\phi_1^0|^2 \chi_1^{\pm,*} \nonumber \\ 
+ &- \chi_2^\pm \lambda_7 |\phi_2^0|^2 \chi_1^{\pm,*} - \chi_2^\pm \lambda^{\prime}_3 |\phi_S|^2 \chi_1^{\pm,*} - \chi_1^\pm \chi_2^\pm \lambda_6 \chi_{1}^{\pm,*,2} - \phi_1^0 \mu_{21} \phi_S \phi_2^{0,*} \nonumber \\ 
+ &- \phi_1^0 \lambda^{\prime}_7 \phi_{S}^{2} \phi_2^{0,*} - \phi_2^0 \lambda_3 |\phi_1^0|^2 \phi_2^{0,*} - \phi_2^0 \lambda_4 |\phi_1^0|^2 \phi_2^{0,*} - \phi_2^0 \lambda_3 |\chi_1^\pm|^2 \phi_2^{0,*} \nonumber \\ 
+ &- \phi_{2}^{0,2} \lambda_7 \phi_1^{0,*} \phi_2^{0,*} - \phi_1^0 \chi_2^\pm \lambda_4 \chi_1^{\pm,*} \phi_2^{0,*} -\frac{1}{2} \phi_{1}^{0,2} \lambda_5 \phi_{2}^{0,*,2} - \chi_1^\pm \mu_{21} \phi_S \chi_2^{\pm,*} \nonumber \\ 
+ &- \chi_1^\pm \lambda^{\prime}_7 \phi_{S}^{2} \chi_2^{\pm,*} - \chi_2^\pm \lambda_3 |\phi_1^0|^2 \chi_2^{\pm,*} - \chi_2^\pm \lambda_3 |\chi_1^\pm|^2 \chi_2^{\pm,*} - \chi_2^\pm \lambda_4 |\chi_1^\pm|^2 \chi_2^{\pm,*} \nonumber \\ 
+ &- \chi_2^\pm \lambda_2 |\phi_2^0|^2 \chi_2^{\pm,*} - \chi_1^\pm \phi_2^0 \lambda_4 \phi_1^{0,*} \chi_2^{\pm,*} - \chi_{2}^{\pm,2} \lambda_7 \chi_1^{\pm,*} \chi_2^{\pm,*} - \phi_1^0 \chi_1^\pm \lambda_5 \phi_2^{0,*} \chi_2^{\pm,*} \nonumber \\ 
+ &-\frac{1}{2} \chi_{1}^{\pm,2} \lambda_5 \chi_{2}^{\pm,*,2} - \phi_1^0 |\phi_S|^2 \phi_2^{0,*} \lambda^{{\prime},*}_3 - \chi_1^\pm |\phi_S|^2 \chi_2^{\pm,*} \lambda^{{\prime},*}_3 -\frac{1}{2} \phi_{2}^{0,2} \phi_{1}^{0,*,2} \lambda_5^* \nonumber \\ 
+ &- \phi_2^0 \chi_2^\pm \phi_1^{0,*} \chi_1^{\pm,*} \lambda_5^* -\frac{1}{2} \chi_{2}^{\pm,2} \chi_{1}^{\pm,*,2} \lambda_5^* - \phi_1^0 |\chi_1^\pm|^2 \phi_2^{0,*} \lambda_6^* - \phi_{1}^{0,2} \phi_1^{0,*} \phi_2^{0,*} \lambda_6^* \nonumber \\ 
+ &- \chi_1^\pm |\phi_1^0|^2 \chi_2^{\pm,*} \lambda_6^* - \chi_{1}^{\pm,2} \chi_1^{\pm,*} \chi_2^{\pm,*} \lambda_6^* - \phi_1^0 |\chi_2^\pm|^2 \phi_2^{0,*} \lambda_7^* - \phi_1^0 \phi_2^0 \phi_{2}^{0,*,2} \lambda_7^* \nonumber \\ 
+ &- \chi_1^\pm |\phi_2^0|^2 \chi_2^{\pm,*} \lambda_7^* - \chi_1^\pm \chi_2^\pm \chi_{2}^{\pm,*,2} \lambda_7^* +\phi_1^0 \phi_2^{0,*} m^{2,*}_{12} +\chi_1^\pm \chi_2^{\pm,*} m^{2,*}_{12} -\frac{1}{2} \mu_{S2} \phi_{S}^{2} \phi_S^* \nonumber \\ 
+ &-\frac{1}{6} \lambda_2'' \phi_{S}^{3} \phi_S^* - \lambda^{\prime}_1 \phi_S |\phi_1^0|^2 \phi_S^* - \lambda^{\prime}_1 \phi_S |\chi_1^\pm|^2 \phi_S^* - \lambda^{\prime}_2 \phi_S |\phi_2^0|^2 \phi_S^* \nonumber \\ 
+ &- \lambda^{\prime}_2 \phi_S |\chi_2^\pm|^2 \phi_S^* - |\phi_1^0|^2 \mu_{11}^* \phi_S^* - |\chi_1^\pm|^2 \mu_{11}^* \phi_S^* - \phi_1^0 \phi_2^{0,*} \mu_{12}^* \phi_S^* \nonumber \\ 
+ &- \chi_1^\pm \chi_2^{\pm,*} \mu_{12}^* \phi_S^* - \phi_2^0 \phi_1^{0,*} \mu_{21}^* \phi_S^* - \chi_2^\pm \chi_1^{\pm,*} \mu_{21}^* \phi_S^* - |\phi_2^0|^2 \mu_{22}^* \phi_S^* - |\chi_2^\pm|^2 \mu_{22}^* \phi_S^* \nonumber \\ 
+ &- |\phi_1^0|^2 \lambda^{{\prime},*}_4 \phi_{S}^{*,2} - |\chi_1^\pm|^2 \lambda^{{\prime},*}_4 \phi_{S}^{*,2} - |\phi_2^0|^2 \lambda^{{\prime},*}_5 \phi_{S}^{*,2} - |\chi_2^\pm|^2 \lambda^{{\prime},*}_5 \phi_{S}^{*,2} \nonumber \\ 
+ &- \phi_1^0 \phi_2^{0,*} \lambda^{{\prime},*}_6 \phi_{S}^{*,2} - \chi_1^\pm \chi_2^{\pm,*} \lambda^{{\prime},*}_6 \phi_{S}^{*,2} - \phi_2^0 \phi_1^{0,*} \lambda^{{\prime},*}_7 \phi_{S}^{*,2} - \chi_2^\pm \chi_1^{\pm,*} \lambda^{{\prime},*}_7 \phi_{S}^{*,2} \nonumber \\ 
+ &-\frac{1}{2} {m_{S}'}^{2,*} \phi_{S}^{*,2} -\frac{1}{2} \phi_S \mu_{S2}^* \phi_{S}^{*,2} -\frac{1}{6} \phi_S \lambda_2''^* \phi_{S}^{*,3} -\frac{1}{6} \mu_{S1}^* \phi_{S}^{*,3} -\frac{1}{24} \lambda_1''^* \phi_{S}^{*,4} - \phi_2^0 d^*_{L,{k \gamma}} \epsilon^*_{d,{j k}} \delta_{\beta \gamma} d_{R,{j \beta}} \nonumber \\ 
+ &- \chi_2^\pm \epsilon^*_{d,{j k}} u^*_{L,{k \gamma}} \delta_{\beta \gamma} d_{R,{j \beta}} - \phi_1^0 d^*_{L,{k \gamma}} Y^*_{d,{j k}} \delta_{\beta \gamma} d_{R,{j \beta}} - \chi_1^\pm u^*_{L,{k \gamma}} Y^*_{d,{j k}} \delta_{\beta \gamma} d_{R,{j \beta}} \nonumber \\ 
+ &- \phi_2^{0,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} \epsilon_{d,{j k}} - \phi_2^{0,*} e^*_{R,{j}} e_{L,{k}} \epsilon_{e,{j k}} +\chi_2^\pm u^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} \epsilon_{u,{j k}} \nonumber \\ 
+ &- \phi_2^0 e^*_{L,{k}} \epsilon^*_{e,{j k}} e_{R,{j}} - \chi_2^\pm \epsilon^*_{e,{j k}} \nu^*_{L,{k}} e_{R,{j}} - \phi_1^0 e^*_{L,{k}} Y^*_{e,{j k}} e_{R,{j}} - \chi_1^\pm \nu^*_{L,{k}} Y^*_{e,{j k}} e_{R,{j}} \nonumber \\ 
+ &- \chi_2^{\pm,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} \epsilon_{d,{j k}} u_{L,{k \gamma}} - \phi_2^0 u^*_{R,{j \beta}} \delta_{\beta \gamma} \epsilon_{u,{j k}} u_{L,{k \gamma}} +\chi_2^{\pm,*} d^*_{L,{k \gamma}} \epsilon^*_{u,{j k}} \delta_{\beta \gamma} u_{R,{j \beta}} \nonumber \\ 
+ &- \phi_2^{0,*} \epsilon^*_{u,{j k}} u^*_{L,{k \gamma}} \delta_{\beta \gamma} u_{R,{j \beta}} +\chi_1^{\pm,*} d^*_{L,{k \gamma}} Y^*_{u,{j k}} \delta_{\beta \gamma} u_{R,{j \beta}} - \phi_1^{0,*} u^*_{L,{k \gamma}} Y^*_{u,{j k}} \delta_{\beta \gamma} u_{R,{j \beta}} \nonumber \\ 
+ &- \chi_2^{\pm,*} e^*_{R,{j}} \epsilon_{e,{j k}} \nu_{L,{k}} - \phi_1^{0,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} Y_{d,{j k}} - \chi_1^{\pm,*} d^*_{R,{j \beta}} \delta_{\beta \gamma} u_{L,{k \gamma}} Y_{d,{j k}} \nonumber \\ 
+ &- \phi_1^{0,*} e^*_{R,{j}} e_{L,{k}} Y_{e,{j k}} - \chi_1^{\pm,*} e^*_{R,{j}} \nu_{L,{k}} Y_{e,{j k}} +\chi_1^\pm u^*_{R,{j \beta}} \delta_{\beta \gamma} d_{L,{k \gamma}} Y_{u,{j k}} \nonumber \\ 
+ &- \phi_1^0 u^*_{R,{j \beta}} \delta_{\beta \gamma} u_{L,{k \gamma}} Y_{u,{j k}} 
+\end{align} 
+\subsection{Gauge fixing terms} 
+\subsubsection{Gauge fixing terms for eigenstates {\tt 'GaugeES'} } 
+\begin{align} 
+L_{GF} = \, &-\frac{1}{2} |\partial_{\mu}B|^2 \xi_{B}^{-1}  -\frac{1}{2} |\partial_{\mu}g|^2 \xi_{g}^{-1}  -\frac{1}{2} |\partial_{\mu}W|^2 \xi_{W}^{-1} 
+\end{align} 
+\subsubsection{Gauge fixing terms for eigenstates {\tt 'EWSB'} } 
+\begin{align} 
+L_{GF} = \, &-\frac{1}{2} |\partial_{\mu}g|^2 \xi_{g}^{-1} -\frac{1}{2} |\partial_{\mu}\gamma|^2 \xi_{\gamma}^{-1} - |\frac{i}{2} g_2 \Big(v_1 \chi_1^{\pm,*}  + v_2 \chi_2^{\pm,*} \Big)\xi_{W^-}  + \partial_{\mu}W^-|^2 \xi_{W^-}^{-1} \nonumber \\ 
+ &-\frac{1}{2} |-\frac{1}{2} \Big(\eta_1 v_1  + \eta_2 v_2 \Big)\xi_{Z} \Big(g_1 \sin\Theta_W   + g_2 \cos\Theta_W  \Big) + \partial_{\mu}Z|^2 \xi_{Z}^{-1} 
+\end{align} 
+\subsection{Fields integrated out} 
+None 

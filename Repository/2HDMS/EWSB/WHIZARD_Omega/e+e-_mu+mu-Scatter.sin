@@ -1,0 +1,8 @@
+model=2HDMS_SARAH
+ 
+process eemumus=e1bar,e1=>e2bar,e2
+ 
+sqrts=0.2 TeV 
+ 
+integrate (eemumu) {iterations=3:10000,6:20000} 
+ 
