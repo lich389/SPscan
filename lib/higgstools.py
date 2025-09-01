@@ -23,6 +23,7 @@ class ht_output:
     hb_r = {}
     lst_hb = []
     htinput = None
+    hinpuths = None
 
 # higgstools read
 def htread(spc, neuID, charID, exbr =True):

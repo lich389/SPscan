@@ -39,7 +39,8 @@ class oup:
     constoup = {
         # 'exclusion':[],
         }
-    htinput = None
+    hinput = None
+    hinpuths = None
 
 def pref_init():
 
@@ -174,30 +175,37 @@ def move_result(result_name,res_loc):
             # os.rename(result_name+'/'+lst_out+'/'+lst_spc, result_name+'/'+lst_spc+'_'+str(k))#lst_out)
         os.rmdir(result_name+'/'+lst_out)
 
-def check_ht(srcf, arg = init.arg_ht):
-    if arg : 
-        ht_read(srcf, arg=False)
-        if check_hs(srcf,exbr=False):
-            ht_read(srcf, arg=True)
-            oup.massoup.update(ht.excess(oup.hinput))
-            return ht.hb(oup.hinput, init.hb_dir,  arg=True)
-        else:
-            return False
-    else:
-        return True
-
-def ht_read(srcf,arg = True):
+def ht_input(srcf):
     slha = read_spc(oup.massoup['file'])
     lk = slha['DECAY'].keys()
     lstid = []
     for id in srcf.par.neuID:
         if str(id) in lk:
             lstid.append(id)
-    # print(oup.massoup['file'], lstid)
-    oup.hinput = ht.htread(oup.massoup['file'], lstid, srcf.par.charID, exbr = arg)
+
+    neuidhs = []
+    lstm = slha['BLOCK']['MASS']['values']
+    for im in range(len(lstm)):
+        if lstm[im][1] < 130 and lstm[im][1] > 120:
+            neuidhs.append(lstm[im][0])
+    # print(oup.massoup['file'])
+    oup.hinput = ht.htread(oup.massoup['file'], lstid, [], exbr = arg.hb_exbr) # higgstools input for hb
+    oup.hinpuths = ht.htread(oup.massoup['file'], neuidhs, [], exbr= arg.hs_exbr) # higgstools input for hs
 
 
-def check_hb(srcf, exbr=arg.hb_exbr,q=arg.hb_q):
+def check_ht(srcf, arg = init.arg_ht):
+    if arg : 
+        ht_input(srcf)
+        if check_hs(srcf):
+            # ht_input(srcf)
+            # oup.massoup.update(ht.excess(oup.hinput))
+            return ht.hb(oup.hinput, init.hb_dir,  arg=True)
+        else:
+            return False
+    else:
+        return True
+
+def check_hb(srcf, q=arg.hb_q):
     # oup.hinput = ht.htread(oup.massoup['file'], srcf.par.neuID, srcf.par.charID, exbr = arg.hb_exbr)
     # ht.hb(oup.htinput, init.hb_dir, srcf.par.neuID, srcf.par.charID)
     # print('0')
@@ -217,10 +225,10 @@ def check_hb(srcf, exbr=arg.hb_exbr,q=arg.hb_q):
     oup.constoup.update(ht.ht_output.hb_r)
     return  hbcheck
 
-def check_hs(srcf,exbr=arg.hs_exbr,q =arg.hs_q):
+def check_hs(srcf,q =arg.hs_q):
     # print('1')
     # oup.hinput = ht.htread(oup.massoup['file'], srcf.par.neuID, srcf.par.charID, exbr = arg.hs_exbr)
-    hscheck = ht.hs(oup.hinput, init.hs_dir, ndf=srcf.nd, q=q)
+    hscheck = ht.hs(oup.hinpuths, init.hs_dir, ndf=srcf.nd, q=q)
     oup.constoup.update({
         'delchi2':ht.ht_output.hs_delch2,
         'hscheck':ht.ht_output.hs_check_SM
@@ -316,9 +324,8 @@ def check_thy(srcf,n):
 
 
 def check_exp(srcf, ex95=arg.ex95):
-    ht_read(srcf, arg=True)
+    ht_input(srcf)
     hbchk = check_hb(srcf)
-    # ht_read(srcf, arg=False)
     hschk = check_hs(srcf)
     stuchk = check_stu(srcf)
     flchk = check_flavor()

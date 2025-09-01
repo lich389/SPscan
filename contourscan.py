@@ -78,8 +78,8 @@ def CS(X,Y):
 
 if __name__ == '__main__':
     os.system('rm -r '+scf.init.out_add+'/*')
-    lx = np.linspace(150, 1000, 20) # ma
-    ly = np.linspace(0.1, 10.0, 20) # tb
+    lx = np.linspace(150, 1000, 4) # ma
+    ly = np.linspace(0.1, 10.0, 4) # tb
     [X,Y] = np.meshgrid(lx, ly)
     # print(X)
     # print(Y)
