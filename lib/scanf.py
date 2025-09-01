@@ -193,7 +193,7 @@ def ht_read(srcf,arg = True):
     for id in srcf.par.neuID:
         if str(id) in lk:
             lstid.append(id)
-    # print(lstid)
+    # print(oup.massoup['file'], lstid)
     oup.hinput = ht.htread(oup.massoup['file'], lstid, srcf.par.charID, exbr = arg)
 
 
@@ -318,7 +318,7 @@ def check_thy(srcf,n):
 def check_exp(srcf, ex95=arg.ex95):
     ht_read(srcf, arg=True)
     hbchk = check_hb(srcf)
-    ht_read(srcf, arg=False)
+    # ht_read(srcf, arg=False)
     hschk = check_hs(srcf)
     stuchk = check_stu(srcf)
     flchk = check_flavor()

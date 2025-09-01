@@ -16,9 +16,10 @@ class out:
 
 shape = ''
 
-scf.init.out_add = '/home/licheng/Code/myscripts/sphenoscan2/results/2hdmst'
+scf.init.out_add = '/home/licheng/Documents/myscript/git/SPscan/results/2hdmst'
 scf.pref_init()
-mdf.par.neuID=[25,  35, 45, 36, 46]
+mdf.par.neuID=[25, 35, 45, 36, 46]
+mdf.par.charID=[37]
 mdf.nd = 3
 
 def scanct(inp):
@@ -30,7 +31,7 @@ def scanct(inp):
     # bt = np.pi/4
     mhh = x
 
-    mdf.par.vs = 500.0
+    mdf.par.vs = 246.0
     mdf.par.tb = y 
 
     # mdf.par.align = 0.05
@@ -46,7 +47,7 @@ def scanct(inp):
     mdf.par.mh2 = 125.09 
     mdf.par.mh3 = 95.4#+200, 
     mdf.par.ma1 = mhh#+200, 
-    mdf.par.ma2 = 500
+    mdf.par.ma2 = 1500
     mdf.par.mhp = mhh
     mdf.par.mutild = mhh
     mdf.initinp()
@@ -77,8 +78,8 @@ def CS(X,Y):
 
 if __name__ == '__main__':
     os.system('rm -r '+scf.init.out_add+'/*')
-    lx = np.linspace(800, 800, 1) # cba1
-    ly = np.linspace(1, 5.0, 2) # a3
+    lx = np.linspace(150, 1000, 20) # ma
+    ly = np.linspace(0.1, 10.0, 20) # tb
     [X,Y] = np.meshgrid(lx, ly)
     # print(X)
     # print(Y)
