@@ -1,10 +1,10 @@
 ! ------------------------------------------------------------------------------  
-! This file was automatically created by SARAH version 4.15.1 
+! This file was automatically created by SARAH version 4.15.4 
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223,
 !           1405.1434, 1411.0675, 1503.03098, 1703.09237, 1706.05372, 1805.07306  
 ! (c) Florian Staub, Mark Goodsell and Werner Porod 2020  
 ! ------------------------------------------------------------------------------  
-! File created at 10:24 on 30.6.2025   
+! File created at 11:15 on 2.9.2025   
 ! ----------------------------------------------------------------------  
  
  
@@ -1211,6 +1211,7 @@ Real(dp) :: ratioPFd(3,3),ratioPFe(3,3),ratioPFu(3,3),ratioPHm(3,2),ratioPVWm(3)
 
 Complex(dp) :: ratioPGG(3),ratioPPP(3)
 
+Real(dp) :: TanBetaQ
 Real(dp) :: gForTadpoles(170)
 Complex(dp) :: tForTadpoles(3)
 Real(dp) :: g1_saveEP 
@@ -1317,7 +1318,8 @@ Complex(dp) :: MUS2Input
 Complex(dp) :: MU11Input
 Complex(dp) :: MU22Input
 Complex(dp) :: MU12Input
-Complex(dp) :: MSpInput*MU21Input
+Complex(dp) :: MU21Input
+Complex(dp) :: MSpInput
 Complex(dp) :: vsInput
 Complex(dp) :: zEInput
 Complex(dp) :: zDInput
@@ -2158,7 +2160,8 @@ MUS2Input=(0._dp,0._dp)
 MU11Input=(0._dp,0._dp)
 MU22Input=(0._dp,0._dp)
 MU12Input=(0._dp,0._dp)
-MSpInput*MU21Input=(0._dp,0._dp)
+MU21Input=(0._dp,0._dp)
+MSpInput=(0._dp,0._dp)
 vsInput=(0._dp,0._dp)
 zEInput=(0._dp,0._dp)
 zDInput=(0._dp,0._dp)

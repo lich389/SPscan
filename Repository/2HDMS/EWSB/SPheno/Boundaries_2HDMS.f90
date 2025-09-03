@@ -1,10 +1,10 @@
 ! ------------------------------------------------------------------------------  
-! This file was automatically created by SARAH version 4.15.1 
+! This file was automatically created by SARAH version 4.15.4 
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223,
 !           1405.1434, 1411.0675, 1503.03098, 1703.09237, 1706.05372, 1805.07306  
 ! (c) Florian Staub, Mark Goodsell and Werner Porod 2020  
 ! ------------------------------------------------------------------------------  
-! File created at 10:24 on 30.6.2025   
+! File created at 11:15 on 2.9.2025   
 ! ----------------------------------------------------------------------  
  
  
@@ -84,6 +84,9 @@ test = SetRenormalizationScale(mZ2)
 If (i_run.Eq.1) Then
    vSM = 248.42485568930796_dp 
    Y_l=0._dp
+   yl_MZ=0._dp
+   yd_MZ=0._dp
+   yu_MZ=0._dp
    Do i1=1,3
        y_l(i1,i1)=sqrt2*mf_l_mZ(i1)/vevSM(1)
        yl_MZ(i1,i1)=sqrt2*mf_l_mZ(i1)/vSM 

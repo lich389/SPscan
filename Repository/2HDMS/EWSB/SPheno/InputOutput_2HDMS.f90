@@ -1,10 +1,10 @@
 ! ------------------------------------------------------------------------------  
-! This file was automatically created by SARAH version 4.15.1 
+! This file was automatically created by SARAH version 4.15.4 
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223,
 !           1405.1434, 1411.0675, 1503.03098, 1703.09237, 1706.05372, 1805.07306  
 ! (c) Florian Staub, Mark Goodsell and Werner Porod 2020  
 ! ------------------------------------------------------------------------------  
-! File created at 10:25 on 30.6.2025   
+! File created at 11:16 on 2.9.2025   
 ! ----------------------------------------------------------------------  
  
  
@@ -20,7 +20,7 @@ Use StandardModel
 Use LoopCouplings_2HDMS 
  
 Logical,Save::LesHouches_Format
-Character(len=8),Save,Private::versionSARAH="4.15.1"
+Character(len=8),Save,Private::versionSARAH="4.15.4"
 Integer,Private::i_cpv=0
 Integer,Save,Private::in_kont(2)
 Logical,Save::Add_Rparity= .False. 
@@ -385,9 +385,12 @@ If (i_c.Eq.1) MU22Input= Cmplx(Real(MU22Input,dp),wert,dp)
 Else If (i_par.Eq.15) Then 
 If (i_c.Eq.0) MU12Input= Cmplx(wert,Aimag(MU12Input),dp) 
 If (i_c.Eq.1) MU12Input= Cmplx(Real(MU12Input,dp),wert,dp) 
-Else If (i_par.Eq.272) Then 
-If (i_c.Eq.0) MSpInput*MU21Input= Cmplx(wert,Aimag(MSpInput*MU21Input),dp) 
-If (i_c.Eq.1) MSpInput*MU21Input= Cmplx(Real(MSpInput*MU21Input,dp),wert,dp) 
+Else If (i_par.Eq.16) Then 
+If (i_c.Eq.0) MU21Input= Cmplx(wert,Aimag(MU21Input),dp) 
+If (i_c.Eq.1) MU21Input= Cmplx(Real(MU21Input,dp),wert,dp) 
+Else If (i_par.Eq.17) Then 
+If (i_c.Eq.0) MSpInput= Cmplx(wert,Aimag(MSpInput),dp) 
+If (i_c.Eq.1) MSpInput= Cmplx(Real(MSpInput,dp),wert,dp) 
 Else If (i_par.Eq.18) Then 
 If (i_c.Eq.0) vsInput= Cmplx(wert,Aimag(vsInput),dp) 
 If (i_c.Eq.1) vsInput= Cmplx(Real(vsInput,dp),wert,dp) 
@@ -1227,7 +1230,7 @@ End Subroutine Read_EXTPAR
       Else
         WriteEffHiggsCouplingRatios=.True.
       End If
-      If (OutputForMG) WriteEffHiggsCouplingRatios=.false.
+      !If (OutputForMG) WriteEffHiggsCouplingRatios=.false.  !! no longer a problem for newer versions of MG
 
      Case(521)
       If (wert.Ne.1._dp) Then
@@ -1523,7 +1526,11 @@ Write(io_L,100) "Block SPINFO         # Program information"
 Write(io_L,100) "     1   SPhenoSARAH      # spectrum calculator"
 Write(io_L,100) "     2   "//version//"    # version number of SPheno"
 Write(io_L,100) "     9   "//versionSARAH//"    # version number of SARAH"
+if (OutputForMG) then ! if MG output we rename the MODSEL block because it messes with pythia 
+Write(io_L,100) "Block MODSELIN  # Input parameters"
+else  
 Write(io_L,100) "Block MODSEL  # Input parameters"
+end if 
 Write(io_L,110)  1, 1, " GUT scale input"
 Write(io_L,110) 2, BoundaryCondition, " Boundary conditions "
 If (i_cpv.Gt.0) Write(io_L,110) 5,i_cpv," switching on CP violation"
@@ -1591,7 +1598,8 @@ If (Abs(Real(MUS2Input,dp)).gt.0._dp) WriteNextBlock = .True.
 If (Abs(Real(MU11Input,dp)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Real(MU22Input,dp)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Real(MU12Input,dp)).gt.0._dp) WriteNextBlock = .True. 
-If (Abs(Real(MSpInput*MU21Input,dp)).gt.0._dp) WriteNextBlock = .True. 
+If (Abs(Real(MU21Input,dp)).gt.0._dp) WriteNextBlock = .True. 
+If (Abs(Real(MSpInput,dp)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Real(vsInput,dp)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Real(zEInput,dp)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Real(zDInput,dp)).gt.0._dp) WriteNextBlock = .True. 
@@ -1643,8 +1651,11 @@ End if
 If (Abs(Real(MU12Input,dp)).gt.0._dp) Then 
 Write(io_L,101) 15, Real(MU12Input,dp) ,"# MU12Input"
 End if 
-If (Abs(Real(MSpInput*MU21Input,dp)).gt.0._dp) Then 
-Write(io_L,101) 272, Real(MSpInput*MU21Input,dp) ,"# MSpInput*MU21Input"
+If (Abs(Real(MU21Input,dp)).gt.0._dp) Then 
+Write(io_L,101) 16, Real(MU21Input,dp) ,"# MU21Input"
+End if 
+If (Abs(Real(MSpInput,dp)).gt.0._dp) Then 
+Write(io_L,101) 17, Real(MSpInput,dp) ,"# MSpInput"
 End if 
 If (Abs(Real(vsInput,dp)).gt.0._dp) Then 
 Write(io_L,101) 18, Real(vsInput,dp) ,"# vsInput"
@@ -1675,7 +1686,8 @@ If (Abs(Aimag(MUS2Input)).gt.0._dp) WriteNextBlock = .True.
 If (Abs(Aimag(MU11Input)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Aimag(MU22Input)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Aimag(MU12Input)).gt.0._dp) WriteNextBlock = .True. 
-If (Abs(Aimag(MSpInput*MU21Input)).gt.0._dp) WriteNextBlock = .True. 
+If (Abs(Aimag(MU21Input)).gt.0._dp) WriteNextBlock = .True. 
+If (Abs(Aimag(MSpInput)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Aimag(vsInput)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Aimag(zEInput)).gt.0._dp) WriteNextBlock = .True. 
 If (Abs(Aimag(zDInput)).gt.0._dp) WriteNextBlock = .True. 
@@ -1727,8 +1739,11 @@ End if
 If (Abs(Aimag(MU12Input)).gt.0._dp) Then 
 Write(io_L,101) 15, Aimag(MU12Input) ,"# MU12Input"
 End if 
-If (Abs(Aimag(MSpInput*MU21Input)).gt.0._dp) Then 
-Write(io_L,101) 272, Aimag(MSpInput*MU21Input) ,"# MSpInput*MU21Input"
+If (Abs(Aimag(MU21Input)).gt.0._dp) Then 
+Write(io_L,101) 16, Aimag(MU21Input) ,"# MU21Input"
+End if 
+If (Abs(Aimag(MSpInput)).gt.0._dp) Then 
+Write(io_L,101) 17, Aimag(MSpInput) ,"# MSpInput"
 End if 
 If (Abs(Aimag(vsInput)).gt.0._dp) Then 
 Write(io_L,101) 18, Aimag(vsInput) ,"# vsInput"

@@ -1,10 +1,10 @@
 ! ------------------------------------------------------------------------------  
-! This file was automatically created by SARAH version 4.15.1 
+! This file was automatically created by SARAH version 4.15.4 
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223,
 !           1405.1434, 1411.0675, 1503.03098, 1703.09237, 1706.05372, 1805.07306  
 ! (c) Florian Staub, Mark Goodsell and Werner Porod 2020  
 ! ------------------------------------------------------------------------------  
-! File created at 10:24 on 30.6.2025   
+! File created at 11:15 on 2.9.2025   
 ! ----------------------------------------------------------------------  
  
  
@@ -15,18 +15,30 @@ Use Settings
 Use Model_Data_2HDMS 
 Contains 
  
-Subroutine HiggsCrossSections(mh,ratGG,ratPP,ratWW,ratZZ,ratTT,CS,kont)
+Subroutine HiggsCrossSections(mh,HTratGG,HTratPP,HTratWW,HTratZZ,HTratTT,CS,kont)
 
 Implicit None 
 Real(dp), Intent(in) :: mh(:)  
-Complex(dp), Intent(in) :: ratPP(:), ratGG(:)  
-Real(dp), Intent(in) :: ratZZ(:), ratWW(:), ratTT(:)  
+Complex(dp), Intent(in) :: HTratPP(:), HTratGG(:)  
+Real(dp), Intent(in) :: HTratZZ(:), HTratWW(:), HTratTT(:)  
 Real(dp), Intent(Out) :: CS(:,:,:)  
 Integer, Intent(inout) :: kont 
 Real(dp) :: x, res 
 Integer :: i1 
 Integer :: nG 
+Complex(dp),allocatable :: ratPP(:), ratGG(:)  
+Real(dp),allocatable :: ratZZ(:), ratWW(:), ratTT(:)  
 nG = Size(mh) 
+allocate(ratPP(nG))
+allocate(ratGG(nG))
+allocate(ratZZ(nG))
+allocate(ratWW(nG))
+allocate(ratTT(nG))
+ratPP(:) = HTratPP(:)**2 
+ratGG(:) = HTratGG(:)**2 
+ratZZ(:) = HTratZZ(:)**2 
+ratWW(:) = HTratWW(:)**2 
+ratTT(:) = HTratTT(:)**2 
 !-------------------- 
 ! LHC 7 
 !-------------------- 

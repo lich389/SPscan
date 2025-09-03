@@ -12,6 +12,7 @@ from lib import input as ifunc
 
 spn = '2HDMS'
 
+v = 246.2205691
 nd = 3
 class par:
     neuID = [25, 35, 45, 36, 46]

@@ -36,6 +36,8 @@ Block EXTPAR      # Input parameters
  13 0.000000E+00    # MU11Input
  14 0.000000E+00    # MU22Input
  15 0.000000E+00    # MU12Input
+ 16 0.000000E+00    # MU21Input
+ 17 -4.0000000E+04    # MSpInput
  18 5.0000000E+02    # vsInput
 Block SPhenoInput   # SPheno specific input 
   1 -1              # error level 

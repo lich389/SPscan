@@ -1,10 +1,10 @@
 ! ------------------------------------------------------------------------------  
-! This file was automatically created by SARAH version 4.15.1 
+! This file was automatically created by SARAH version 4.15.4 
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223,
 !           1405.1434, 1411.0675, 1503.03098, 1703.09237, 1706.05372, 1805.07306  
 ! (c) Florian Staub, Mark Goodsell and Werner Porod 2020  
 ! ------------------------------------------------------------------------------  
-! File created at 10:24 on 30.6.2025   
+! File created at 11:15 on 2.9.2025   
 ! ----------------------------------------------------------------------  
  
  
@@ -121,6 +121,7 @@ RXiWm = RXi
 RXiZ = RXi 
 
  ! Running angles 
+TanBetaQ = vu/vd
 
  
 Call TreeMasses(MAh,MAh2,MFd,MFd2,MFe,MFe2,MFu,MFu2,Mhh,Mhh2,MHm,MHm2,MVWm,           & 
@@ -138,8 +139,8 @@ MS2Tree  = MS2
  
 If ((DecoupleAtRenScale).and.(Abs(1._dp-RXiNew).lt.0.01_dp)) Then 
 vSM=vSM_Q 
-vd=vSM/Sqrt(1 + TanBeta**2) 
-vu=(TanBeta*vSM)/Sqrt(1 + TanBeta**2) 
+vd=vSM/Sqrt(1 + TanBetaQ**2) 
+vu=(TanBetaQ*vSM)/Sqrt(1 + TanBetaQ**2) 
 Else 
 Call CouplingsForVectorBosons(g1,g2,TW,ZP,vd,vu,ZH,ZA,ZDL,ZUL,ZEL,cplcFdFdVPL,        & 
 & cplcFdFdVPR,cplcFeFeVPL,cplcFeFeVPR,cplcFuFuVPL,cplcFuFuVPR,cplcgWmgWmVP,              & 
@@ -161,8 +162,8 @@ Call Pi1LoopVZ(mZ2,Mhh,Mhh2,MAh,MAh2,MFd,MFd2,MFe,MFe2,MFu,MFu2,MVZ,MVZ2,       
 
 vev2=4._dp*Real(mZ2+dmz2,dp)/(g1**2+g2**2) -0 
 vSM=sqrt(vev2) 
-vd=vSM/Sqrt(1 + TanBeta**2) 
-vu=(TanBeta*vSM)/Sqrt(1 + TanBeta**2) 
+vd=vSM/Sqrt(1 + TanBetaQ**2) 
+vu=(TanBetaQ*vSM)/Sqrt(1 + TanBetaQ**2) 
 End if 
 Call SolveTadpoleEquations(g1,g2,g3,Lam1pp,Lam4p,Lam6p,Lam7p,Lam5p,Lam2pp,            & 
 & Lam6,Lam5,Lam7,Lam3p,Lam1,Lam4,Lam3,Lam2,Lam1p,Lam2p,Lam3pp,Yu,epsU,Yd,Ye,             & 
