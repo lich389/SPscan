@@ -8,7 +8,8 @@ import os
 import lib.ttH as tth
 
 # import src.src_n2hdm as mdf
-import src.src_2hdms as mdf
+import src.src_2hdmsz3 as mdf
+import src.basis_2hdmsz3 as bsz3
 
 class out:
     dz = pd.DataFrame()
@@ -26,31 +27,22 @@ def scanct(inp):
     x = inp[0]
     y = inp[1]
     k = inp[2]
+    mdf.inpd(
+        cba=0.0,
+        a13=0.0,
+        a23=0.0,
+        a4=0.0,
+        mh1=x,
+        mh2=125.09,
+        mh3=95.4,
+        ma1=x,
+        ma2=1500,
+        mhp=x,
+        vs=246.0,
+        tb=y,
+        type=1,
+    )
 
-    mdf.par.type = 1
-    # bt = np.pi/4
-    mhh = x
-
-    mdf.par.vs = 246.0
-    mdf.par.tb = y 
-
-    # mdf.par.align = 0.05
-    # mdf.par.ch1bt = 0.8 
-    # mdf.par.ch1v = 0.3#0.35 #0.03, 
-
-    mdf.par.cba = 0
-    mdf.par.a13 = 0
-    mdf.par.a23 = 0
-    mdf.par.a4 = 0
-
-    mdf.par.mh1 = mhh
-    mdf.par.mh2 = 125.09 
-    mdf.par.mh3 = 95.4#+200, 
-    mdf.par.ma1 = mhh#+200, 
-    mdf.par.ma2 = 1500
-    mdf.par.mhp = mhh
-    mdf.par.mutild = mhh
-    mdf.initinp()
     # mdf.extinitinp('z3')
     # out_thy =  (scf.check_thy(da_inp,k))
     scf.SP_run(mdf,k)

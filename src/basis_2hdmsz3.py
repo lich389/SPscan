@@ -5,7 +5,7 @@ import numpy as np
 
 v = 246.2205691
 class z3input:
-    def __init__(self,a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs):
+    def __init__(self,a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhc,tb,vs,type):
         self.a12 = a12
         self.a13 = a13
         self.a23 = a23
@@ -15,10 +15,11 @@ class z3input:
         self.mh3 = mh3
         self.ma1 = ma1
         self.ma2 = ma2
-        self.mhc = mhp
+        self.mhp = mhc
         self.tb = tb
         self.beta = np.arctan(tb)
         self.vS = vs
+        self.type = type
     
 
     def Rot(self):
@@ -51,7 +52,7 @@ class z3input:
         self.mutild = -np.sqrt(self.ma11sq)
         self.lam1 = -((-(self.m11sq*(1/np.cos(self.beta))**2) + self.mutild**2*(self.tb)**2)/v**2)
         self.lam2 = -((self.mutild**2*(1/(self.tb))**2 - self.m22sq*(1/np.sin(self.beta))**2)/v**2)
-        self.lam4 = (4*(self.ma11sq - self.mhc**2)*(np.cos(self.beta))*(1/np.sin(2*self.beta))*(np.sin(self.beta)))/v**2
+        self.lam4 = (4*(self.ma11sq - self.mhp**2)*(np.cos(self.beta))*(1/np.sin(2*self.beta))*(np.sin(self.beta)))/v**2
         self.lam3 = -((-self.mutild**2 + self.lam4*v**2 - self.m12sq*(1/np.sin(self.beta))*(1/np.cos(self.beta)))/v**2)
         self.mu12 = -(self.ma12sq/v)
         self.mus1 = (-(self.ma22sq*self.vS) + self.ma12sq*v*(np.cos(self.beta))*(np.sin(self.beta)))/(3.*self.vS**2)
@@ -59,40 +60,34 @@ class z3input:
         self.l2p  = -0.5*(self.mu12*v*(1/(self.tb)) - self.m23sq*(1/np.sin(self.beta)))/(v*self.vS)
         self.l3pp = -0.5*(-(self.m33sq*self.vS) + self.mus1*self.vS**2 - self.mu12*v**2*(np.cos(self.beta))*(np.sin(self.beta)))/self.vS**3
         self.M12 = self.mutild**2*(np.sin(self.beta)*np.cos(self.beta))
-
-    def initinp(self):
-        z3input.Rot(self)
-        z3input.massmx(self)
-        z3input.basischange(self)
-        self.minpar = {
-        "lam1": {'pdg':1,'value':self.lam1},
-        "lam2": {'pdg':2,'value':self.lam2},
-        "lam3": {'pdg':3,'value':self.lam3},
-        "lam4": {'pdg':4,'value':self.lam4},
-        "lam5": {'pdg':5,'value':0.0},
-        "lam6": {'pdg':6,'value':0.0},
-        "lam7": {'pdg':7,'value':0.0},
-        "tb": {'pdg':8,'value':self.tb},
-        "m12": {'pdg':9,'value':self.M12},
-    }
-        self.extpar = {
-        "lam1p": {'pdg':1,'value':self.l1p},
-        "lam2p": {'pdg':2,'value':self.l2p},
-        "lam3pp": {'pdg':10,'value':self.l3pp},
-        "mus1": {'pdg':11,'value':self.mus1},
-        "mu12": {'pdg':15,'value':self.mu12},
-        "vS": {'pdg':18,'value':self.vS},
-        }
+    
+    def yukawa(self):
+        if int((self.type)) == 1:
+            self.zu = 1/self.tb
+            self.zd = 1/self.tb
+            self.ze = 1/self.tb
+        if int((self.type)) == 2:
+            self.zu = 1/self.tb
+            self.zd =  -self.tb
+            self.ze =  -self.tb
+        if int((self.type)) == 3:
+            self.zu = 1/self.tb
+            self.zd = 1/self.tb
+            self.ze =  -self.tb
+        if int((self.type)) == 4:
+            self.zu = 1/self.tb
+            self.zd =  -self.tb
+            self.ze = 1/self.tb
 
                                                     
 
-minp = z3input(-np.pi/4, 0.0, 0.0, 0.0, 800, 125, 95, 800, 800, 800, 1,500)
-minp.initinp()
+# minp = z3input(-np.pi/4, 0.0, 0.0, 0.0, 800, 125, 95, 800, 800, 800, 1,500, 1)
+# minp.initinp()
 
 
-print(minp.minpar)
-print(minp.extpar)
-print(minp.ma22sq)
+# print(minp.minpar)
+# print(minp.extpar)
+# print(minp.ma22sq)
     
 
 

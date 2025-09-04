@@ -96,7 +96,7 @@ def SP_run(srcf,n, out_add = init.out_add):
     model = srcf.spn
     lhinp = read_spc(inp_dir + 'LesHouches.in.'+model)
 
-    # print(da_inp.keys())
+    # print(inp_dir)
     
     os.chdir(out_add)
     # Check whether all minpar are provided
@@ -140,7 +140,7 @@ def SP_run(srcf,n, out_add = init.out_add):
             'file':out_add +'/' + str(n)+"/SPheno.spc."+model
         }
         
-        srcf.recmas()
+        # srcf.recmas()
         # df = pd.DataFrame(da_inp)
         # oup.massoup = df.loc[['value']].to_dict(orient='index')['value']
         # oup.massoup.update({'cba':srcf.par.cba})
