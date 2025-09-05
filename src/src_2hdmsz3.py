@@ -158,9 +158,9 @@ def bfb(inp):
     l2 = inp.lam2
     l3 = inp.lam3
     l4 = inp.lam4
-    l7 = inp.lam1p
-    l8 = inp.lam2p
-    l6 = inp.lam3pp
+    l7 = inp.l1p
+    l8 = inp.l2p
+    l6 = inp.l3pp
     if l1>0 and l2>0 and l6>0:
         C1 = math.sqrt(l1*l6/2)
         C2 = math.sqrt(l2*l6/2)
@@ -219,9 +219,9 @@ def uni(inp):
     l2 = inp.lam2
     l3 = inp.lam3
     l4 = inp.lam4
-    k1 = inp.lam1p
-    k2 = inp.lam2p
-    k3 = inp.lam3pp
+    k1 = inp.l1p
+    k2 = inp.l2p
+    k3 = inp.l3pp
     if abs(k1) < plim and abs(k2) < plim and abs(k3)/2 < plim and abs(l1) < plim and abs(l2) < plim and abs(l3) < plim:
         uni1 = l3 - l4
         uni2 = l3 + l4

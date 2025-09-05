@@ -1,5 +1,5 @@
 {
-    "n":30,
+    "memory":"/dev/shm/",
     "home":"/home/licheng/",
     "scan":"Code/myscripts/sphenoscan2/",
     "input_path":"/home/licheng/Documents/myscript/git/SPscan/inputs/",
@@ -8,13 +8,5 @@
     "micromega":"/home/licheng/Code/micromegas_5.2.13/complexZ2bDM/",
     "hbdataset":"/home/licheng/Code/hbdataset/",
     "hsdataset":"/home/licheng/Code/hsdataset/",
-    "evade":"/home/licheng/Code/EVADE/build/",
-    "print check": 0,
-    "unitarity check": 1,
-    "boundedness from below check": 1,
-    "ew precision check": 1,
-    "higgstools check": 1,
-    "flavor check": 1,
-    "evade check": 1,
-    "micromega check": 0
+    "evade":"/home/licheng/Code/EVADE/build/"
 }

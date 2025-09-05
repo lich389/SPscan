@@ -15,7 +15,7 @@ class out:
 
 shape = ''
 
-ctscanf = scf.scan('/home/licheng/Documents/myscript/git/SPscan/build/results/2hdmst')
+ctscanf = scf.scan('2hdmst')
 
 mdf.par.neuID=[25, 35, 45, 36, 46]
 mdf.par.charID=[37]
@@ -38,7 +38,7 @@ def scanct(inp):
         mhp=x,
         vs=246.0,
         tb=y,
-        type=1,
+        type=2,
     )
 
     ctscanf.SP_run(mdf,k)
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     if not os.path.exists(ctscanf.out_add):
         os.mkdir(ctscanf.out_add)
     os.system('rm -r '+ctscanf.out_add+'/*')
-    lx = np.linspace(150, 1000, 2) # ma
-    ly = np.linspace(0.1, 10.0, 2) # tb
+    lx = np.linspace(150, 1000, 20) # ma
+    ly = np.linspace(0.1, 10.0, 20) # tb
     [X,Y] = np.meshgrid(lx, ly)
 
     shape = str(X.shape)
@@ -77,5 +77,5 @@ if __name__ == '__main__':
     for l in range(len(dfz)):
         dz = dz._append(dfz[l], ignore_index=True)
     # print(out.df)
-    dz.to_csv(str(X.shape)+'.csv')
+    dz.to_csv('build/'+str(X.shape)+'.csv')
 

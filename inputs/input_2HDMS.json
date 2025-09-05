@@ -89,7 +89,18 @@
 		"max":0.0,
 		"num":1
 	},
-	"mdtype":"",
 	"type":2,
+	"n_exp":1,
+	"n_threads":30,
+	"n_run":30,
+	"outdir":"/home/licheng/Documents/myscript/git/SPscan/build/test/",
+    "unitarity check": 1,
+    "boundedness from below check": 1,
+    "ew precision check": 1,
+    "higgstools check": 1,
+    "flavor check": 1,
+    "evade check": 1,
+    "micromega check": 0,
+    "print check": 0,
 	"model":"2hdms"
 }

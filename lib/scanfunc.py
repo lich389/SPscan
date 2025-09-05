@@ -33,9 +33,9 @@ def write_input(i_f, setup, i_lha):
     f_setup.close()
     return 0
 
-def save(scanf):
+def save(scanf, oupdir):
     # os.system('touch '+oupdir+'/masspar.json')
-    with open(scanf.out_add+'/masspar.json', 'w') as mxinp:
+    with open(oupdir+'/masspar.json', 'w') as mxinp:
         json.dump(scanf.massoup, mxinp, indent = 4)
         mxinp.close()
 
@@ -61,7 +61,7 @@ def move_result(result_name,res_loc):
 spset = 'SPhenoInput'
 
 class scan:
-    def __init__(self,out_add, pref = json.load(open('prefix.json'))):
+    def __init__(self,oup, pref = json.load(open('prefix.json'))):
         self.home_add = pref['home']
         self.scr_add = pref['scan']
         self.sp_dir = pref['SPheno']
@@ -70,12 +70,10 @@ class scan:
         self.hs_dir = pref['hsdataset']
         self.inp_dir = pref['input_path']
         self.eva_dir = pref['evade']
-        self.infocheck = pref['print check']
+        self.memdir = pref['memory']
         self.n = int(pref['n'])
-        self.arg_uni = pref['unitarity check']
-        self.arg_bfb = pref['boundedness from below check']
-        self.arg_stu = pref['ew precision check']
-        self.out_add = out_add
+        self.oupfolder = oup
+        self.out_add = self.memdir+self.oupfolder
         self.constoup = {
             # 'exclusion':[],
             }
@@ -84,22 +82,24 @@ class scan:
         self.arg_stu  = True
         self.arg_ht   = True
         self.arg_flv  = True
-        self.arg_vstb = True
-        self.arg_dm   = True
+        self.arg_vstb = False
+        self.arg_dm   = False
 
 
 
     def SP_run(self, srcf,n):
         ############# initialize ##############
-        inp_dir = self.inp_dir
-        out_add = self.out_add
-        sp_dir = self.sp_dir
+        # inp_dir = self.inp_dir
+        # out_add = self.out_add
+        # sp_dir = self.sp_dir
         # srcf.initinp()
         da_inp = srcf.par.minpar
         da_extp = srcf.par.extpar
         model = srcf.spn
-        lhinp = read_spc(inp_dir + 'LesHouches.in.'+model)
-        os.chdir(out_add)
+        os.chdir(self.out_add)
+        os.mkdir(self.out_add +'/' + str(n))
+        os.chdir(self.out_add +'/'+ str(n))
+        lhinp = read_spc(self.inp_dir + 'LesHouches.in.'+model)
         # Check whether all minpar are provided
         if len(lhinp['BLOCK']['MINPAR']['values']) != len(da_inp):
             print('invalid input')
@@ -119,26 +119,24 @@ class scan:
                     if lhinp['BLOCK']['EXTPAR']['values'][ip_p][0] == da_extp[parek]['pdg']:
                         lhinp['BLOCK']['EXTPAR']['values'][ip_p][1] = da_extp[parek]['value']
 
-        write_input('/dev/shm/LesHouches.in.'+model+str(n), inp_dir + spset, lhinp)
+        write_input('./LesHouches.in.'+model+str(n), self.inp_dir + spset, lhinp)
         # print(lhinp)
 
         # Run SPheno
-        os.mkdir(out_add +'/' + str(n))
-        os.chdir(out_add +'/'+ str(n))
-        os.system(sp_dir+'bin/SPheno'+model+' '+'/dev/shm/LesHouches.in.'+model+str(n)+" | grep -q \"string\"")
-        os.system('mv '+'/dev/shm/LesHouches.in.'+model+str(n)+' '+out_add+'/' + str(n))
+        os.system(self.sp_dir+'bin/SPheno'+model+' '+'./LesHouches.in.'+model+str(n)+" | grep -q \"string\"")
+        # os.system('mv '+'/dev/shm/LesHouches.in.'+model+str(n)+' '+out_add+'/' + str(n))
         # os.system('rm '+'/dev/shm/LesHouches.in.'+model+str(n))
-        os.chdir(out_add)
+        os.chdir(self.out_add)
         if not os.path.isfile(str(n)+"/SPheno.spc."+model):
-            print(da_inp)
+            # print(da_inp)
             re_SPheno = {
                 'spc_gen':False
             }
-            os.system("rm -rf "+out_add+str(n)+"/")
+            os.system("rm -rf "+str(n)+"/")
         else:
             re_SPheno = {
                 'spc_gen':True,
-                'file':out_add +'/' + str(n)+"/SPheno.spc."+model
+                'file':self.out_add +'/' + str(n)+"/SPheno.spc."+model
             }
             
             self.massoup = re_SPheno
@@ -236,8 +234,8 @@ class scan:
 
     def check_ht(self, srcf):
         if self.arg_ht : 
-            self.ht_input(self,srcf)
-            if self.check_hs(self,srcf):
+            self.ht_input(srcf)
+            if self.check_hs(srcf):
                 # ht_input(srcf)
                 # oup.massoup.update(ht.excess(oup.hinput))
                 return ht.hb(self.hinput, self.hb_dir,  arg=True)
@@ -248,10 +246,10 @@ class scan:
 
 
 
-    def check_uni(self,srcf,method='spheno'):
+    def check_uni(self,srcf,method='analy'):
         if self.arg_uni:
             if method == 'analy':
-                return srcf.uni(srcf.par)
+                return srcf.uni(srcf.par.params)
             if method == 'spheno':
                 spc = read_spc(self.massoup['file'])
                 uni = spc['BLOCK']['TREELEVELUNITARITY']['values'][0][1]
@@ -265,7 +263,7 @@ class scan:
 
     def check_bfb(self,srcf):
         if self.arg_bfb:
-            return srcf.bfb(srcf.par)
+            return srcf.bfb(srcf.par.params)
         else:
             return True
 
