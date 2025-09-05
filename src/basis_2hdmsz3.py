@@ -81,14 +81,4 @@ class z3input:
 
                                                     
 
-# minp = z3input(-np.pi/4, 0.0, 0.0, 0.0, 800, 125, 95, 800, 800, 800, 1,500, 1)
-# minp.initinp()
 
-
-# print(minp.minpar)
-# print(minp.extpar)
-# print(minp.ma22sq)
-    
-
-
-# %%
