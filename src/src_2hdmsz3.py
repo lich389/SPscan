@@ -22,13 +22,14 @@ class par:
     params = None
 
 md = 'z3'
+if md == 'z3':
+    import src.basis_2hdmsz3 as mdf
 
-def ran_inp(inpf, mdarg = 'z3'):
+def ran_inp(inpf):
     # - SET RANDOM SCAN PARAMETERS -
     # generate the random inputs
-    if mdarg == 'z3':
-        import src.basis_2hdmsz3 as mdfz3
     inp = json.load(open(inpf))
+
 
     tb = ifunc.para_inp(inp['tb'])
     cba = ifunc.para_inp(inp['cba'])
@@ -47,7 +48,7 @@ def ran_inp(inpf, mdarg = 'z3'):
 
     type = int(inp['type'])
     # print(a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs,type)
-    z3inp = mdfz3.z3input(a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs,type)
+    z3inp = mdf.input(a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs,type)
     initinp(z3inp)
     # return vs, par.tb, a12, a13, a23, a4, mh1, mh2, mh3, ma1, ma2, mp, mutild
 
@@ -65,10 +66,8 @@ def inpd(cba = 0,
          tb = 1,
          vs = 500,
          type = 1):
-    if md == 'z3':
-        import src.basis_2hdmsz3 as mdfz3
     a12 = np.arctan(tb) - np.arccos(cba)
-    z3inp = mdfz3.z3input(a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs,type)
+    z3inp = mdf.input(a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhp,tb,vs,type)
     initinp(z3inp)
 
 def initinp(inp):
@@ -81,30 +80,30 @@ def initinp(inp):
     "lam2": {'pdg':2,'value':inp.lam2},
     "lam3": {'pdg':3,'value':inp.lam3},
     "lam4": {'pdg':4,'value':inp.lam4},
-    "lam5": {'pdg':5,'value':0.0},
-    "lam6": {'pdg':6,'value':0.0},
-    "lam7": {'pdg':7,'value':0.0},
+    "lam5": {'pdg':5,'value':inp.lam5},
+    "lam6": {'pdg':6,'value':inp.lam6},
+    "lam7": {'pdg':7,'value':inp.lam7},
     "tb": {'pdg':8,'value':inp.tb},
     "m12": {'pdg':9,'value':inp.M12},
 }
     par.extpar = {
     "lam1p": {'pdg':1,'value':inp.l1p},
     "lam2p": {'pdg':2,'value':inp.l2p},
-    "lam3p": {'pdg':3,'value':0.0},
-    "lam4p": {'pdg':4,'value':0.0},
-    "lam5p": {'pdg':5,'value':0.0},
-    "lam6p": {'pdg':6,'value':0.0},
-    "lam7p": {'pdg':7,'value':0.0},
-    "lam1pp": {'pdg':8,'value':0.0},
-    "lam2pp": {'pdg':9,'value':0.0},
+    "lam3p": {'pdg':3,'value':inp.l3p},
+    "lam4p": {'pdg':4,'value':inp.l4p},
+    "lam5p": {'pdg':5,'value':inp.l5p},
+    "lam6p": {'pdg':6,'value':inp.l6p},
+    "lam7p": {'pdg':7,'value':inp.l7p},
+    "lam1pp": {'pdg':8,'value':inp.l1pp},
+    "lam2pp": {'pdg':9,'value':inp.l2pp},
     "lam3pp": {'pdg':10,'value':inp.l3pp},
     "mus1": {'pdg':11,'value':inp.mus1},
-    "mus2": {'pdg':12,'value':0.0},
-    "mu11": {'pdg':13,'value':0.0},
-    "mu22": {'pdg':14,'value':0.0},
+    "mus2": {'pdg':12,'value':inp.mus2},
+    "mu11": {'pdg':13,'value':inp.mu11},
+    "mu22": {'pdg':14,'value':inp.mu22},
     "mu12": {'pdg':15,'value':inp.mu12},
-    "mu21": {'pdg':16,'value':0.0},
-    "msp": {'pdg':17,'value':0.0},
+    "mu21": {'pdg':16,'value':inp.mu21},
+    "msp": {'pdg':17,'value':inp.msp},
     "vS": {'pdg':18,'value':inp.vS},
     "zE":{'pdg':19,'value':inp.ze},
     "zD":{'pdg':20,'value':inp.zd},
@@ -137,21 +136,7 @@ class oup:
     stu = {}
     maspar={}
 
-def recmas(par):
-    oup.maspar.update({
-        "tb":par.tb,
-        "vs":par.vs,
-        "a12":par.a12,
-        "a13":par.a13,
-        "a23":par.a23,
-        "mh1":par.mh1,
-        "mh2":par.mh2,
-        "mh3":par.mh3,
-        "ma1":par.ma1,
-        "ma2":par.ma2,
-        "mhp":par.mhp,
-        "mutild":par.mutild
-    })
+
 
 def ewp_check(parini):
     par = parini.params
@@ -169,13 +154,13 @@ def ewp_check(parini):
     return res_stu
 
 def bfb(inp):
-    l1 = inp['lam1']
-    l2 = inp['lam2']
-    l3 = inp['lam3']
-    l4 = inp['lam4']
-    l7 = inp['lam1p']
-    l8 = inp['lam2p']
-    l6 = inp['lam3pp']
+    l1 = inp.lam1
+    l2 = inp.lam2
+    l3 = inp.lam3
+    l4 = inp.lam4
+    l7 = inp.lam1p
+    l8 = inp.lam2p
+    l6 = inp.lam3pp
     if l1>0 and l2>0 and l6>0:
         C1 = math.sqrt(l1*l6/2)
         C2 = math.sqrt(l2*l6/2)
@@ -230,13 +215,13 @@ def bfb(inp):
 def uni(inp):
 
     plim = math.pi*8
-    l1 = inp['lam1']
-    l2 = inp['lam2']
-    l3 = inp['lam3']
-    l4 = inp['lam4']
-    k1 = inp['lam1p']
-    k2 = inp['lam2p']
-    k3 = inp['lam3pp']
+    l1 = inp.lam1
+    l2 = inp.lam2
+    l3 = inp.lam3
+    l4 = inp.lam4
+    k1 = inp.lam1p
+    k2 = inp.lam2p
+    k3 = inp.lam3pp
     if abs(k1) < plim and abs(k2) < plim and abs(k3)/2 < plim and abs(l1) < plim and abs(l2) < plim and abs(l3) < plim:
         uni1 = l3 - l4
         uni2 = l3 + l4

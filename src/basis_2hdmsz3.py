@@ -4,7 +4,7 @@ import numpy as np
 
 
 v = 246.2205691
-class z3input:
+class input:
     def __init__(self,a12,a13,a23,a4,mh1,mh2,mh3,ma1,ma2,mhc,tb,vs,type):
         self.a12 = a12
         self.a13 = a13
@@ -20,6 +20,21 @@ class z3input:
         self.beta = np.arctan(tb)
         self.vS = vs
         self.type = type
+        self.lam5 = 0
+        self.lam6 = 0
+        self.lam7 = 0
+        self.l1pp = 0
+        self.l2pp = 0
+        self.l3p = 0
+        self.l4p = 0
+        self.l5p = 0
+        self.l6p = 0
+        self.l7p = 0
+        self.mus2 = 0
+        self.mu11 = 0
+        self.mu22 = 0
+        self.mu21 = 0
+        self.msp = 0
     
 
     def Rot(self):
