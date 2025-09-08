@@ -64,17 +64,17 @@ class input:
         self.ma12sq = (self.ma1)**2 *self.RA11*self.RA12 + (self.ma2)**2 *self.RA21*self.RA22
 
     def basischange(self):
-        self.mutild = -np.sqrt(self.ma11sq)
-        self.lam1 = -((-(self.m11sq*(1/np.cos(self.beta))**2) + self.mutild**2*(self.tb)**2)/v**2)
-        self.lam2 = -((self.mutild**2*(1/(self.tb))**2 - self.m22sq*(1/np.sin(self.beta))**2)/v**2)
-        self.lam4 = (4*(self.ma11sq - self.mhp**2)*(np.cos(self.beta))*(1/np.sin(2*self.beta))*(np.sin(self.beta)))/v**2
-        self.lam3 = -((-self.mutild**2 + self.lam4*v**2 - self.m12sq*(1/np.sin(self.beta))*(1/np.cos(self.beta)))/v**2)
+        self.mutild = np.sqrt(self.ma11sq)
         self.mu12 = -(self.ma12sq/v)
-        self.mus1 = (-(self.ma22sq*self.vS) + self.ma12sq*v*(np.cos(self.beta))*(np.sin(self.beta)))/(3.*self.vS**2)
-        self.l1p  = -0.5*(-(self.m13sq*(1/np.cos(self.beta))) + self.mu12*v*((self.tb)))/(v*self.vS)
-        self.l2p  = -0.5*(self.mu12*v*(1/(self.tb)) - self.m23sq*(1/np.sin(self.beta)))/(v*self.vS)
-        self.l3pp = -0.5*(-(self.m33sq*self.vS) + self.mus1*self.vS**2 - self.mu12*v**2*(np.cos(self.beta))*(np.sin(self.beta)))/self.vS**3
-        self.M12 = self.mutild**2*(np.sin(self.beta)*np.cos(self.beta))
+        self.lam4 = 2*(self.ma11sq - self.mhp**2)/v**2
+        self.lam1 = -((self.ma11sq * self.tb**2 - self.m11sq*(1+self.tb**2))/v**2)
+        self.lam2 = -((self.ma11sq/((self.tb)**2) - self.m22sq*(1+self.tb**2)/((self.tb)**2))/v**2)
+        self.lam3 = -((self.ma11sq -2*self.mhp**2 - self.m12sq*(1+self.tb**2)/self.tb)/v**2)
+        self.l1p  = -(-self.ma12sq *self.tb-self.m13sq*np.sqrt(1+self.tb**2) )/(2*v*self.vS)
+        self.l2p  = -(-self.ma12sq - self.m23sq*np.sqrt(1+self.tb**2))/(2*v*self.vS*self.tb)
+        self.l3pp = -(4*self.ma12sq*self.tb*v/(1+self.tb**2) - self.ma22sq*self.vS-3*self.m33sq*self.vS)/(6* self.vS**3)
+        self.mus1 = -(self.ma22sq*self.vS - self.ma12sq*v*self.tb/(1+self.tb**2))/(3.*self.vS**2)
+        self.M12 = (self.ma11sq*v*self.tb/(1+self.tb**2) - self.ma12sq*self.vS)/v
     
     def yukawa(self):
         if int((self.type)) == 1:

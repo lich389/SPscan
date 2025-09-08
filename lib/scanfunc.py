@@ -71,7 +71,7 @@ class scan:
         self.inp_dir = pref['input_path']
         self.eva_dir = pref['evade']
         self.memdir = pref['memory']
-        self.n = int(pref['n'])
+        # self.n = int(pref['n'])
         self.oupfolder = oup
         self.out_add = self.memdir+self.oupfolder
         self.constoup = {
@@ -84,6 +84,10 @@ class scan:
         self.arg_flv  = True
         self.arg_vstb = False
         self.arg_dm   = False
+        self.massoup = {}
+        self.constoup = {}
+        self.hinput = None
+        self.hinpuths = None
 
 
 
@@ -146,22 +150,6 @@ class scan:
         return re_SPheno['spc_gen']
 
 
-    def ht_input(self, srcf):
-        slha = read_spc(self.massoup['file'])
-        lk = slha['DECAY'].keys()
-        lstid = []
-        for id in srcf.par.neuID:
-            if str(id) in lk:
-                lstid.append(id)
-
-        neuidhs = []
-        lstm = slha['BLOCK']['MASS']['values']
-        for im in range(len(lstm)):
-            if lstm[im][1] < 130 and lstm[im][1] > 120:
-                neuidhs.append(lstm[im][0])
-        # print(oup.massoup['file'])
-        self.hinput = ht.htread(self.massoup['file'], lstid, [], exbr = True) # higgstools input for hb using explicit br
-        self.hinpuths = ht.htread(self.massoup['file'], neuidhs, [], exbr= False) # higgstools input for hs using br by higgstools
 
 
 
@@ -171,18 +159,20 @@ class scan:
         # print('0')
         hbcheck = ht.hb_sel(self.hinput, self.hb_dir, neuID=srcf.par.neuID, q=q)#, idp='25')
         # try:
-        ht.hb_channl(self.hinput, self.hb_dir, 'VV', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'bb', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'tautau', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'tt', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'tttt', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'gamgam', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'HH', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'jj', neuID=srcf.par.neuID)
-        ht.hb_channl(self.hinput, self.hb_dir, 'ZH', neuID=srcf.par.neuID)
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'VV', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'bb', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'tautau', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'tt', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'tttt', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'gamgam', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'HH', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'jj', neuID=srcf.par.neuID))
+        self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'ZH', neuID=srcf.par.neuID))
+        # if self.massoup['mh1'] < 160:
+        #     print(self.constoup,rtttt)
         # except:
             # pass
-        self.constoup.update(ht.ht_output.hb_r)
+        # self.constoup.update(ht.ht_output.hb_r)
         return  hbcheck
 
     def check_hs(self,srcf,q =False):
@@ -278,6 +268,22 @@ class scan:
 
 
 
+def ht_input(scanf, srcf):
+    slha = read_spc(scanf.massoup['file'])
+    lk = slha['DECAY'].keys()
+    lstid = []
+    for id in srcf.par.neuID:
+        if str(id) in lk:
+            lstid.append(id)
+
+    neuidhs = []
+    lstm = slha['BLOCK']['MASS']['values']
+    for im in range(len(lstm)):
+        if lstm[im][1] < 130 and lstm[im][1] > 120:
+            neuidhs.append(lstm[im][0])
+    # print(oup.massoup['file'])
+    scanf.hinput = ht.htread(scanf.massoup['file'], lstid, [], exbr = True) # higgstools input for hb using explicit br
+    scanf.hinpuths = ht.htread(scanf.massoup['file'], neuidhs, [], exbr= False) # higgstools input for hs using br by higgstools
 
 
 def check_thy(scanf,srcf,n):
@@ -295,7 +301,7 @@ def check_thy(scanf,srcf,n):
 
 
 def check_exp(scanf,srcf):
-    scanf.ht_input(srcf)
+    ht_input(scanf,srcf)
     hbchk = scanf.check_hb(srcf)
     hschk = scanf.check_hs(srcf)
     stuchk = scanf.check_stu(srcf)

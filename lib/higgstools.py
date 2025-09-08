@@ -79,8 +79,8 @@ def hb_channl(input,dir_hbdata, chan,  neuID, idp='', arg = 'q' ):
             })
         except:
             dict_re.update({})
-    ht_output.hb_r.update(dict_re)
-    return hbresult.allowed
+    # ht_output.hb_r.update(dict_re)
+    return dict_re
 
 def hb_app(input, dir_hbdata, neuID=[25, 35, 45, 46], idp='', arg = 'q'):
     bounds = HB.Bounds(dir_hbdata)

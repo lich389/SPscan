@@ -18,10 +18,11 @@ shape = ''
 ctscanf = scf.scan('2hdmst')
 
 mdf.par.neuID=[25, 35, 45, 36, 46]
-mdf.par.charID=[37]
+mdf.par.charID=[]
 mdf.nd = 3
 
 def scanct(inp):
+    ctscanf = scf.scan('2hdmst')
     x = inp[0]
     y = inp[1]
     k = inp[2]
@@ -32,13 +33,13 @@ def scanct(inp):
         a4=0.0,
         mh1=x,
         mh2=125.09,
-        mh3=95.4,
+        mh3=1500,
         ma1=x,
         ma2=1500,
         mhp=x,
         vs=246.0,
         tb=y,
-        type=2,
+        type=1,
     )
 
     ctscanf.SP_run(mdf,k)
@@ -67,8 +68,8 @@ if __name__ == '__main__':
     if not os.path.exists(ctscanf.out_add):
         os.mkdir(ctscanf.out_add)
     os.system('rm -r '+ctscanf.out_add+'/*')
-    lx = np.linspace(150, 1000, 20) # ma
-    ly = np.linspace(0.1, 10.0, 20) # tb
+    lx = np.linspace(150, 1000, 40) # ma
+    ly = np.exp(np.linspace(np.log(0.1), np.log(20), 40)) # tb
     [X,Y] = np.meshgrid(lx, ly)
 
     shape = str(X.shape)
