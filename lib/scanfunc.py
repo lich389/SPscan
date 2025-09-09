@@ -85,7 +85,6 @@ class scan:
         self.arg_vstb = False
         self.arg_dm   = False
         self.massoup = {}
-        self.constoup = {}
         self.hinput = None
         self.hinpuths = None
 

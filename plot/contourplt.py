@@ -74,6 +74,18 @@ class cntplt:
 
         # if line:
         #     plt_conline(ax, color, lab, cr[0], il=il,ls=ls)
+    def plt_hatchline(self, ax, lab):
+        # cmap = mpl.colors.ListedColormap(['white',c])
+        cnt = ax.contourf((self.X), (self.Y), (self.Z), levels=[1.0, 1.01], colors='none', hatches=['--'])#.resampled(cl))
+        self.contline(ax, 'tab:grey', lab, 1.0, il=False)
+        # plt_conline(ax, 'tab:grey', lab, 1.0, il=True)
+    
+    def printidx(self):
+        df = (self.dfin)
+        numeric_cols = df.select_dtypes(include=[np.number]).columns
+        has_value_above_1 = (df[numeric_cols] > 1).any()
+        columns_with_values_above_1 = has_value_above_1[has_value_above_1].index.tolist()
+        print(columns_with_values_above_1)
 
 class inp:
     shape = (20,20)

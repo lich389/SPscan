@@ -27,7 +27,7 @@ def scanct(inp):
     y = inp[1]
     k = inp[2]
     mdf.inpd(
-        cba=0.0,
+        cba=0.025,
         a13=0.0,
         a23=0.0,
         a4=0.0,
@@ -39,7 +39,7 @@ def scanct(inp):
         mhp=x,
         vs=246.0,
         tb=y,
-        type=1,
+        type=2,
     )
 
     ctscanf.SP_run(mdf,k)
@@ -68,8 +68,8 @@ if __name__ == '__main__':
     if not os.path.exists(ctscanf.out_add):
         os.mkdir(ctscanf.out_add)
     os.system('rm -r '+ctscanf.out_add+'/*')
-    lx = np.linspace(150, 1000, 40) # ma
-    ly = np.exp(np.linspace(np.log(0.1), np.log(20), 40)) # tb
+    lx = np.linspace(150, 1000, 50) # ma
+    ly = np.exp(np.linspace(np.log(0.1), np.log(20), 50)) # tb
     [X,Y] = np.meshgrid(lx, ly)
 
     shape = str(X.shape)

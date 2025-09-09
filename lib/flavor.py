@@ -1,6 +1,6 @@
 # %%
 # import utilities as al
-from lib import scanf as al
+from lib import scanfunc as al
 from numpy import sqrt
 
 class oup:
