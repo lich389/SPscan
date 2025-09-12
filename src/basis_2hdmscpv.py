@@ -30,10 +30,9 @@ class complex:
 
 
 class input:
-    def __init__(self,a12, a13, a23, a14, a24, a34, a15, a25, a35, a45,mh1,mh2,mh3,mh4,mh5,mhc,mut,tb,vs,xi,xis,
-                 iml5 = 0, rel6 = 0, rel7 = 0, rel1pp = 0, rel4p = 0, rel5p = 0, iml7p = 0,
-                 type = 1):
-        v = 246.2205691
+    def __init__(self,a12, a13, a23, a14, a24, a34, a15, a25, a35, a45,mh1,mh2,mh3,mh4,mh5,mhc,mut,tb,vs,xi,xis,type,
+                 iml5 = 0, rel6 = 0, rel7 = 0, rel1pp = 0, rel4p = 0, rel5p = 0, iml7p = 0):
+        self.v = 246.2205691
         self.a12 = a12
         self.a13 = a13
         self.a23 = a23
@@ -50,6 +49,7 @@ class input:
         self.mh4 = mh4
         self.mh5 = mh5
         self.mhp = mhc
+        self.mut = mut
         self.tb = tb
         self.beta = np.arctan(tb)
         self.vS = vs
@@ -61,6 +61,8 @@ class input:
         self.rel7 = rel7
         self.rel1pp = rel1pp
         self.rel4p = rel4p
+        self.rel5p = rel5p
+        self.iml7p = iml7p
 
         self.l2pp= complex(0,0)
         self.l3p = complex(0,0)
@@ -76,23 +78,23 @@ class input:
         self.zui = 0
         self.zdi = 0
         self.zei = 0
-        if self.type == -1:
+        if type == -1:
             self.zur = 0
             self.zdr = 0
             self.zer = 0
-        if self.type == 1:
+        if type == 1:
             self.zur = 1/self.tb
             self.zdr = 1/self.tb
             self.zer = 1/self.tb
-        if self.type == 2:
+        if type == 2:
             self.zur = 1/self.tb
             self.zdr =  -self.tb
             self.zer =  -self.tb
-        if self.type == 3:
+        if type == 3:
             self.zur = 1/self.tb
             self.zdr = 1/self.tb
             self.zer =  -self.tb
-        if self.type == 4:
+        if type == 4:
             self.zur = 1/self.tb
             self.zdr =  -self.tb
             self.zer = 1/self.tb
