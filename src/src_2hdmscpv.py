@@ -1,0 +1,178 @@
+import numpy as np
+import json
+from lib import utilities as uti
+from src import STU_2hdms as stu
+
+from lib import input as ifunc
+
+from src import basis_2hdmscpv as bc
+
+spn = '2HDMSCPV'
+
+v = 2.46218458E+02
+nd = 5
+class par:
+    neuID = [25, 35, 45, 36, 46]
+    charID = [37]
+    minpar = {}
+    extpar = {}
+    params = None
+
+
+
+
+
+
+
+def ran_inp(inpf):
+#     -SET RANDOM SCAN PARAMETERS--
+#     # generate the random inputs
+    inp = json.load(open(inpf))
+    tb = ifunc.para_inp(inp['tb'])
+    cba12 = ifunc.para_inp(inp['cba'])
+    a12 = np.arctan(tb) - np.arccos(cba12)
+    inp = bc.input(a12=a12,
+                a13 = ifunc.para_inp(inp['a13']),
+                a23 = ifunc.para_inp(inp['a23']),
+                a14 = ifunc.para_inp(inp['a14']),
+                a24 = ifunc.para_inp(inp['a24']),
+                a34 = ifunc.para_inp(inp['a34']),
+                a15 = ifunc.para_inp(inp['a15']),
+                a25 = ifunc.para_inp(inp['a25']),
+                a35 = ifunc.para_inp(inp['a35']),
+                a45 = ifunc.para_inp(inp['a45']),
+                mh1 = ifunc.para_inp(inp['mh1']),
+                mh2 = ifunc.para_inp(inp['mh2']),
+                mh3 = ifunc.para_inp(inp['mh3']),
+                mh4 = ifunc.para_inp(inp['mh4']),
+                mh5 = ifunc.para_inp(inp['mh5']),
+                mhc = ifunc.para_inp(inp['mp']),
+                mut = ifunc.para_inp(inp['mutild']),
+                tb  = tb,
+                vs = ifunc.para_inp(inp['vs']),
+                xi = ifunc.para_inp(inp['xi1']),
+                xis = ifunc.para_inp(inp['xis']),
+                type = int(inp['type']),
+                   )
+
+    initinp(inp)
+    # print(par.minpar)
+
+    # return vs, par.tb, a12, a13, a23, a4, mh1, mh2, mh3, ma1, ma2, mp, mutild
+
+
+def initinp(inp):
+    inp.basischange()
+
+    par.minpar = {
+        "lam1": {'pdg':1,'value':inp.l1},
+        "lam2": {'pdg':2,'value':inp.l2},
+        "lam3": {'pdg':3,'value':inp.l3},
+        "lam4": {'pdg':4,'value':inp.l4},
+        "lam3pp":{'pdg':6,'value':inp.l3pp},
+        "lam1p": {'pdg':7,'value':inp.l1p},
+        "lam2p": {'pdg':8,'value':inp.l2p},
+        "m12":{'pdg':5,'value':inp.m12},
+        "msp":{'pdg':9,'value':inp.msp},
+        "tb": {'pdg':10,'value':inp.tb},
+        "vs": {'pdg':11,'value':inp.vS},
+        "zur":{'pdg':12,'value':inp.zur},
+        "zdr":{'pdg':13,'value':inp.zdr},
+        "zer":{'pdg':14,'value':inp.zer},
+        "eta": {'pdg':15,'value':inp.eta},
+        "zeta": {'pdg':16,'value':inp.zeta},
+    }
+
+    par.extpar = {
+        "lam1ppr":{'pdg':1,'value':inp.l1pp.Re()},
+        "lam1ppi":{'pdg':11,'value':inp.l1pp.Im()},
+        "lam2ppr":{'pdg':2,'value':inp.l2pp.Re()},
+        "lam2ppi":{'pdg':12,'value':inp.l2pp.Im()},
+        "lam3pr":{'pdg':3,'value':inp.l3p.Re()},
+        "lam3pi": {'pdg':13,'value':inp.l3p.Im()},
+        "lam4pr":{'pdg':4,'value':inp.l4p.Re()},
+        "lam4pi": {'pdg':14,'value':inp.l4p.Im()},
+        "lam5pr":{'pdg':5,'value':inp.l5p.Re()},
+        "lam5pi": {'pdg':15,'value':inp.l5p.Im()},
+        "lam6pr":{'pdg':6,'value':inp.l6p.Re()},
+        "lam6pi":{'pdg':16,'value':inp.l6p.Im()},
+        "lam7pr":{'pdg':7,'value':inp.l7p.Re()},
+        "lam7pi":{'pdg':17,'value':inp.l7p.Im()},
+        "lam5r": {'pdg':8,'value':inp.l5.Re()},
+        "lam5i":{'pdg':18,'value':inp.l5.Im()},
+        "lam6r":{'pdg':9,'value':inp.l6.Re()},
+        "lam6i":{'pdg':19,'value':inp.l6.Im()},
+        "lam7r":{'pdg':10,'value':inp.l7.Re()},
+        "lam7i":{'pdg':20,'value':inp.l7.Im()},
+        "mu11r":{'pdg':21,'value':inp.mu11.Re()},
+        "mu12r":{'pdg':22,'value':inp.mu12.Re()},
+        "mu21r":{'pdg':23,'value':inp.mu21.Re()},
+        "mu22r":{'pdg':24,'value':inp.mu22.Re()},
+        "mus1r":{'pdg':25,'value':inp.mus1.Re()},
+        "mus2r":{'pdg':26,'value':inp.mus2.Re()},
+        "mu11i":{'pdg':31,'value':inp.mu11.Im()},
+        "mu12i":{'pdg':32,'value':inp.mu12.Im()},
+        "mu21i":{'pdg':33,'value':inp.mu21.Im()},
+        "mu22i":{'pdg':34,'value':inp.mu22.Im()},
+        "mus1i":{'pdg':35,'value':inp.mus1.Im()},
+        "mus2i":{'pdg':36,'value':inp.mus2.Im()},
+        "zui":{'pdg':41,'value':inp.zui},
+        "zdi":{'pdg':42,'value':inp.zdi},
+        "zei":{'pdg':43,'value':inp.zei},
+    }
+    oup.maspar.update({
+        "tb":par.inp.tb,
+        "vs":par.inp.vS,
+        "xi1":par.inp.eta,
+        "xis":par.inp.zeta,
+        "a12":par.a12,
+        "a13":par.a13,
+        "a23":par.a23,
+        "a14":par.a14,
+        "a24":par.a24,
+        "a34":par.a34,
+        "a15":par.a15,
+        "a25":par.a25,
+        "a35":par.a35,
+        "a45":par.a45,
+        "mh1":par.mh1,
+        "mh2":par.mh2,
+        "mh3":par.mh3,
+        "ma1":par.mh4,
+        "ma2":par.mh5,
+        "mhp":par.mhp,
+        "mutild":par.mut
+    })
+    par.params = inp
+
+
+
+
+    #--------------------------------------------------------------------
+    
+
+
+class oup:
+    bfbct = {}
+    unict = {}
+    vacstab = {}
+    stu = {}
+    maspar={}
+
+from src import bfb_2hdmscpv as bfbl
+
+
+def bfb(par):
+    lrho = np.linspace(-1,1,3)
+    lth = np.linspace(-1,1,3)*np.pi/2
+    lps = np.linspace(-1,1,3)*np.pi/2
+    lbfb = []
+    for ri in lrho:
+        for ti in lth:
+            for pi in lps:
+                omr = bfbl.copos(np.array(bfbl.bfb_mat(par.inp, ri, ti, pi)))
+                lbfb.append(omr)
+                if not omr:
+                    break
+    # print(lbfb)
+    return np.all(lbfb)
