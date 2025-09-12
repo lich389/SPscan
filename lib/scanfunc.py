@@ -157,6 +157,7 @@ class scan:
         # ht.hb(oup.htinput, init.hb_dir, srcf.par.neuID, srcf.par.charID)
         # print('0')
         hbcheck = ht.hb_sel(self.hinput, self.hb_dir, neuID=srcf.par.neuID, q=q)#, idp='25')
+        self.constoup.update(ht.ht_output.hb_r)
         # try:
         self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'VV', neuID=srcf.par.neuID))
         self.constoup.update(ht.hb_channl(self.hinput, self.hb_dir, 'bb', neuID=srcf.par.neuID))
@@ -171,7 +172,6 @@ class scan:
         #     print(self.constoup,rtttt)
         # except:
             # pass
-        # self.constoup.update(ht.ht_output.hb_r)
         return  hbcheck
 
     def check_hs(self,srcf,q =False):

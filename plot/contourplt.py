@@ -30,6 +30,14 @@ class cntplt:
         # self.dfin = pd.read_csv(inp.fpath+str(inp.shape)+inp.flab+'.csv')
         self.zdf = self.dfin[chan].max(axis=1)
 
+    def apdcomb(self,cntplt,zlabchannel):
+        self.X = (np.hstack([np.reshape(cntplt.xdf,cntplt.shape),np.reshape(self.xdf,self.shape)]))
+        self.Y = (np.hstack([np.reshape(cntplt.ydf,cntplt.shape),np.reshape(self.ydf,self.shape)]))
+        self.Z = (np.hstack([np.reshape(cntplt.dfin[zlabchannel],cntplt.shape),np.reshape(self.zdf,self.shape)]))
+        # self.Y.append(np.reshape(cntplt.ydf,cntplt.shape))
+        # self.Z = np.reshape(self.zdf._append(cntplt.dfin[zlabchannel]), shape)
+
+
     
     def cut(self, cut = {'x':[],'y':[]},both=False):    
         if len(cut) !=0:

@@ -6,3 +6,11 @@ cd SPheno-4.0.5
 sed -i '9s/ifort/gfortran/g' Makefile 
 cp -r ../../Repository/2HDMS/EWSB/SPheno 2HDMS/
 make Model=2HDMS/
+
+# cd ..
+# git clone https://gitlab.com/higgsbounds/hbdataset.git
+# git clone https://gitlab.com/higgsbounds/hsdataset.git
+# git https://gitlab.com/higgsbounds/higgstools.git
+# cd higgstools
+# pip install .
+# cd ..
