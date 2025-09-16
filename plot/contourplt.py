@@ -61,8 +61,8 @@ class cntplt:
         self.Z = np.reshape(list(map(float, self.zdf)),self.shape)
 
     
-    def contline(self, ax, c, lab='', cr=1.0, il=False, ls = '-'):
-        CS = ax.contour((self.X), (self.Y), (self.Z), levels=[cr], colors=[c],linestyles=ls)
+    def contline(self, ax, c, lab='', cr=1.0, il=False, ls = '-',lw=1):
+        CS = ax.contour((self.X), (self.Y), (self.Z), levels=[cr], colors=[c],linestyles=ls, linewidths=lw)
         fmt = {}
         strs = [lab]
         for l, s in zip([cr], strs):

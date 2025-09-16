@@ -115,6 +115,7 @@ def initinp(inp):
         "a12":inp.a12,
         "a13":inp.a13,
         "a23":inp.a23,
+        "a4":inp.a4,
         "mh1":inp.mh1,
         "mh2":inp.mh2,
         "mh3":inp.mh3,

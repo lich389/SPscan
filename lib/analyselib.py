@@ -1,7 +1,59 @@
 import os
 import pylha
 
+def readinput(spc):
+    blockpar = spc['HMIX']['values']
+    blockpar2 = spc['NMSSMRUN']['values']
+    dict_par = {}
+    for i in range(len(blockpar)):
+        if blockpar[i][0] == 31:
+            dict_par.update({'Lambda1': blockpar[i][1]})
+        if blockpar[i][0] == 34:
+            dict_par.update({'Lambda4': blockpar[i][1]})
+        if blockpar[i][0] == 33:
+            dict_par.update({'Lambda3': blockpar[i][1]})
+        if blockpar[i][0] == 32:
+            dict_par.update({'Lambda2': blockpar[i][1]})
+        if blockpar[i][0] == 38:
+            dict_par.update({'Lambda1p': blockpar[i][1]})
+        if blockpar[i][0] == 39:
+            dict_par.update({'Lambda2p': blockpar[i][1]})
+        if blockpar[i][0] == 40:
+            dict_par.update({'Lambda3pp': blockpar[i][1]})
+        if blockpar[i][0] == 41:
+            dict_par.update({'MUS1': blockpar[i][1]})
+        if blockpar[i][0] == 42:
+            dict_par.update({'MU12': blockpar[i][1]})
+        if blockpar[i][0] == 102:
+            dict_par.update({'v1': blockpar[i][1]})
+        if blockpar[i][0] == 103:
+            dict_par.update({'v2': blockpar[i][1]})
+        dict_par.update({'vS': blockpar2[1][1]})
+    return dict_par
 
+def read_mix(zh, l='h'):
+    dict_mx = {}
+    for ih in range(len(zh)):
+        if zh[ih][0] == 1 and zh[ih][1] ==1:
+            dict_mx.update({'z'+l+'11': zh[ih][2]})
+        if zh[ih][0] == 1 and zh[ih][1] ==2:
+            dict_mx.update({'z'+l+'12': zh[ih][2]})
+        if zh[ih][0] == 1 and zh[ih][1] ==3:
+            dict_mx.update({'z'+l+'13': zh[ih][2]})
+        if zh[ih][0] == 2 and zh[ih][1] ==1:
+            dict_mx.update({'z'+l+'21': zh[ih][2]})
+        if zh[ih][0] == 2 and zh[ih][1] ==2:
+            dict_mx.update({'z'+l+'22': zh[ih][2]})
+        if zh[ih][0] == 2 and zh[ih][1] ==3:
+            dict_mx.update({'z'+l+'23': zh[ih][2]})
+        if zh[ih][0] == 3 and zh[ih][1] ==1:
+            dict_mx.update({'z'+l+'31': zh[ih][2]})
+        if zh[ih][0] == 3 and zh[ih][1] ==2:
+            dict_mx.update({'z'+l+'32': zh[ih][2]})
+        if zh[ih][0] == 3 and zh[ih][1] ==3:
+            dict_mx.update({'z'+l+'33': zh[ih][2]})
+
+    return dict_mx
 
 def read_mass(block_mass):
     dict_mass={}
@@ -168,11 +220,29 @@ def read_decay(block_decay):
                 dict_decay.update({'br_h2tautau':mh2_br[i_d2][0]})
         if abs(mh2_br[i_d2][2]) == abs(mh2_br[i_d2][3]) == 6:
                 dict_decay.update({'br_h2tautau':mh2_br[i_d2][0]})
-
-    try:
-         ma2_br = block_decay['46']['values']
-    except:
-         pass
+                
+    ma2_br = block_decay['46']['values']
+    for i_d3 in range(len(ma2_br)):
+        if ma2_br[i_d3][2] == ma2_br[i_d3][3] == 22:
+                dict_decay.update({'br_a2gamgam':ma2_br[i_d3][0]})
+        if ma2_br[i_d3][2] == ma2_br[i_d3][3] == 21:
+                dict_decay.update({'br_a2gluglu':ma2_br[i_d3][0]})
+        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 6:
+                dict_decay.update({'br_a2tt':ma2_br[i_d3][0]})
+        # else:
+            #  print(ma2_br)
+        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 5:
+                dict_decay.update({'br_a2bb':ma2_br[i_d3][0]})
+        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 15:
+                dict_decay.update({'br_a2tautau':ma2_br[i_d3][0]})
+        if int(ma2_br[i_d3][2]) == 25 and int(ma2_br[i_d3][3]) == 36:
+                dict_decay.update({'br_a2a1h1':ma2_br[i_d3][0]})
+        if abs(ma2_br[i_d3][2]) == 25 and  abs(ma2_br[i_d3][3]) == 23:
+                dict_decay.update({'br_a2h1z':ma2_br[i_d3][0]})
+        if abs(ma2_br[i_d3][2]) == 35 and  abs(ma2_br[i_d3][3]) == 23:
+                dict_decay.update({'br_a2h2z':ma2_br[i_d3][0]})
+        if abs(ma2_br[i_d3][2]) == 35 and  abs(ma2_br[i_d3][3]) == 36:
+                dict_decay.update({'br_a2a1h2':ma2_br[i_d3][0]})
     return dict_decay
 
 def read_mixing(sdir):

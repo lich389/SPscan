@@ -278,7 +278,7 @@ def ht_input(scanf, srcf):
     neuidhs = []
     lstm = slha['BLOCK']['MASS']['values']
     for im in range(len(lstm)):
-        if lstm[im][1] < 130 and lstm[im][1] > 120:
+        if lstm[im][1] < 126 and lstm[im][1] > 124:
             neuidhs.append(lstm[im][0])
     # print(oup.massoup['file'])
     scanf.hinput = ht.htread(scanf.massoup['file'], lstid, [], exbr = True) # higgstools input for hb using explicit br
