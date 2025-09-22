@@ -7,7 +7,7 @@ from lib import input as ifunc
 
 from src import basis_2hdmscpv as bc
 
-spn = '2HDMSCPV'
+spn = 'C2HDMS'
 
 v = 2.46218458E+02
 nd = 5
@@ -170,9 +170,12 @@ def bfb(par):
     for ri in lrho:
         for ti in lth:
             for pi in lps:
-                omr = bfbl.copos(np.array(bfbl.bfb_mat(par.inp, ri, ti, pi)))
+                omr = bfbl.copos(np.array(bfbl.bfb_mat(par, ri, ti, pi)))
                 lbfb.append(omr)
                 if not omr:
                     break
     # print(lbfb)
     return np.all(lbfb)
+
+def uni(par):
+    return True

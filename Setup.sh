@@ -7,6 +7,9 @@ sed -i '9s/ifort/gfortran/g' Makefile
 cp -r ../../Repository/2HDMS/EWSB/SPheno 2HDMS/
 make Model=2HDMS/
 
+cp -r ../../Repository/C2HDMS/EWSB/SPheno C2HDMS/
+make Model=C2HDMS/
+
 # cd ..
 # git clone https://gitlab.com/higgsbounds/hbdataset.git
 # git clone https://gitlab.com/higgsbounds/hsdataset.git

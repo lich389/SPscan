@@ -128,7 +128,6 @@ class input:
 
 
 
-
     # def massbasis(self):
         # print(mh1,mh2,mh3)
         self.m11sq = (mh1*self.R11)**2 + (mh2*self.R21)**2 + (mh3*self.R31)**2 + (mh4*self.R41)**2 + (mh5*self.R51)**2
@@ -148,6 +147,9 @@ class input:
         self.m45sq = (mh1)**2 *self.R14*self.R15 + (mh2)**2 *self.R24*self.R25 + (mh3)**2 *self.R34*self.R35 + (mh4)**2 *self.R44*self.R45 + (mh5)**2 *self.R54*self.R55
         self.mhcsq = self.mhp**2
         self.mutild = mut**2
+
+
+
 
 
     def basischange(self):

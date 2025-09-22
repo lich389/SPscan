@@ -21,12 +21,7 @@ def ranscan(label):
     os.chdir(scan.out_add)
     mdf.ran_inp(inpjson)
     # df.columns = ['unitarity', 'boundedness', 'STU', 'spc','flavor','vacuuminstabil','DMexp']
-    if not scan.check_uni(mdf):
-        # print('uni')
-        re_scan['count'] = 0
-        # re_scan['unitarity'] = 1
-        re_scan['exclusion'] = 'unitarity'
-    elif not scan.check_bfb(mdf):
+    if not scan.check_bfb(mdf):
         # print('bfb')
         re_scan['count'] = 0
         # re_scan['boundedness'] = 1
@@ -36,6 +31,11 @@ def ranscan(label):
         re_scan['count'] = 0
         # re_scan['spc'] = 1
         re_scan['exclusion'] = 'invalid spc generation'
+    elif not scan.check_uni(mdf):
+        # print('uni')
+        re_scan['count'] = 0
+        # re_scan['unitarity'] = 1
+        re_scan['exclusion'] = 'unitarity'
     elif not scan.check_stu(mdf):
         # print('STU')
         re_scan['count'] = 0
@@ -102,22 +102,10 @@ if __name__ == '__main__':
         from src import src_n2hdm as mdf # for n2hdm
     if model == "2hdms" :
         from src import src_2hdmsz3 as mdf # for 2hdms
-    if model == "2hdms_cpv" :
+    if model == "c2hdms" :
         from src import src_2hdmscpv as mdf # for 2hdms
 
-    # try:
-    #     n_exp = int(sys.argv[2])
-    # except:
-    #     print("Usage: ./scan.py [input_file] [n_exp] [n_threads] [output]")
-    #     sys.exit(1)
 
-    # try:
-    #     n_core = int(sys.argv[3])# run with n threadings
-    #     scf.init.out_add = str(sys.argv[4])
-    #     # name_re = str(sys.argv[4])
-    # except:
-    #     n_core = 1
-    #     name_re = 'scan_output'
 
     n_exp = int(inp_lst['n_exp'])
     n_core = int(inp_lst['n_threads'])

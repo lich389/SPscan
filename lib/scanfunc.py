@@ -77,18 +77,18 @@ class scan:
         self.constoup = {
             # 'exclusion':[],
             }
-        self.arg_bfb  = True
-        self.arg_uni  = True
-        self.arg_stu  = True
-        self.arg_ht   = True
-        self.arg_flv  = True
+        self.arg_bfb  = False
+        self.arg_uni  = False
+        self.arg_stu  = False
+        self.arg_ht   = False
+        self.arg_flv  = False
         self.arg_vstb = False
         self.arg_dm   = False
         self.massoup = {}
         self.hinput = None
         self.hinpuths = None
 
-
+    # def arginput(self, inp):
 
     def SP_run(self, srcf,n):
         ############# initialize ##############

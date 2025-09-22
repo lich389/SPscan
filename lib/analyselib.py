@@ -161,89 +161,69 @@ def read_coupling_fermion(block_coupl):
     return dict_coup
 
 
-def read_width(decay):
-    dict_width = {
-            'w_h1':decay['25']['info'][0],
-            'w_h2':decay['35']['info'][0],
-            'w_h3':decay['45']['info'][0],
-            'w_a1':decay['36']['info'][0],
-            'w_hp':decay['37']['info'][0],
-            }
-    try:
-        dict_width.update({'w_a2':decay['46']['info'][0]})
-    except:
-         pass
-    # dict_width={}
-    # for parts in decay.keys():
-    #     print(parts)
-    #     dict_width.update({'w_h1':decay[parts]['info'][0]})
+    
+def get_id(id):
+    if abs(int(id)) ==  25:
+        return 'h1'
+    if abs(int(id)) ==  35:
+        return 'h2'
+    if abs(int(id)) ==  45:
+        return 'h3'
+    if abs(int(id)) ==  36:
+        return 'a1'
+    if abs(int(id)) ==  46:
+        return 'a2'
+    if abs(int(id)) ==  37:
+        return 'hp'
+    if abs(int(id)) ==  21:
+        return 'g'
+    if abs(int(id)) ==  22:
+        return 'gam'
+    if abs(int(id)) ==  23:
+        return 'Z'
+    if abs(int(id)) ==  24:
+        return 'W'
+    if abs(int(id)) ==  1:
+        return 'd'
+    if abs(int(id)) ==  2:
+        return 'u'
+    if abs(int(id)) ==  3:
+        return 's'
+    if abs(int(id)) ==  4:
+        return 'c'
+    if abs(int(id)) ==  5:
+        return 'b'
+    if abs(int(id)) ==  6:
+        return 't'
+    if abs(int(id)) ==  11:
+        return 'e'
+    if abs(int(id)) ==  12:
+        return 'nue'
+    if abs(int(id)) ==  13:
+        return 'mu'
+    if abs(int(id)) ==  14:
+        return 'numu'
+    if abs(int(id)) ==  15:
+        return 'tau'
+    if abs(int(id)) ==  16:
+        return 'nutau'
+
+
+def read_decay(decay):
+    dict_width = {}
+    for id in  decay.keys():
+        pdgmt = get_id(id)
+        dict_width.update({'w_'+pdgmt:decay[id]['info'][0]})
+        lstbr = decay[id]['values']
+        for idxbr in range(len(lstbr)):
+            pdg1 = get_id(int(lstbr[idxbr][2]))
+            pdg2 = get_id(int(lstbr[idxbr][3]))
+            dict_width.update({'br_'+pdgmt+'_'+str(pdg1)+str(pdg2):lstbr[idxbr][0]})
     
     return dict_width
     
 
-def read_decay(block_decay):
-    dict_decay = {}
-    mh1_br = block_decay['25']['values']
-    mh2_br = block_decay['35']['values']
-    mh3_br = block_decay['45']['values']
-    ma1_br = block_decay['36']['values']
-    mhp_br = block_decay['37']['values']
 
-    for i_d1 in range(len(mh1_br)):
-        if mh1_br[i_d1][2] == mh1_br[i_d1][3] == 22:
-                dict_decay.update({'br_h1gamgam':mh1_br[i_d1][0]})
-        if mh1_br[i_d1][2] == mh1_br[i_d1][3] == 21:
-                dict_decay.update({'br_h1gluglu':mh1_br[i_d1][0]})
-        if mh1_br[i_d1][2] == mh1_br[i_d1][3] == 23:
-                dict_decay.update({'br_h1ZZ':mh1_br[i_d1][0]})
-        if abs(mh1_br[i_d1][2]) == abs(mh1_br[i_d1][3]) == 24:
-                dict_decay.update({'br_h1WW':mh1_br[i_d1][0]})
-        if abs(mh1_br[i_d1][2]) == abs(mh1_br[i_d1][3]) == 5:
-                dict_decay.update({'br_h1bb':mh1_br[i_d1][0]})
-        if abs(mh1_br[i_d1][2]) == abs(mh1_br[i_d1][3]) == 15:
-                dict_decay.update({'br_h1tautau':mh1_br[i_d1][0]})
-        if abs(mh1_br[i_d1][2]) == abs(mh1_br[i_d1][3]) == 6:
-                dict_decay.update({'br_h1tautau':mh1_br[i_d1][0]})
-
-    for i_d2 in range(len(mh2_br)):
-        if mh2_br[i_d2][2] == mh2_br[i_d2][3] == 22:
-                dict_decay.update({'br_h2gamgam':mh2_br[i_d2][0]})
-        if mh2_br[i_d2][2] == mh2_br[i_d2][3] == 21:
-                dict_decay.update({'br_h2gluglu':mh2_br[i_d2][0]})
-        if mh2_br[i_d2][2] == mh2_br[i_d2][3] == 23:
-                dict_decay.update({'br_h2ZZ':mh2_br[i_d2][0]})
-        if abs(mh2_br[i_d2][2]) == abs(mh2_br[i_d2][3]) == 24:
-                dict_decay.update({'br_h2WW':mh2_br[i_d2][0]})
-        if abs(mh2_br[i_d2][2]) == abs(mh2_br[i_d2][3]) == 5:
-                dict_decay.update({'br_h2bb':mh2_br[i_d2][0]})
-        if abs(mh2_br[i_d2][2]) == abs(mh2_br[i_d2][3]) == 15:
-                dict_decay.update({'br_h2tautau':mh2_br[i_d2][0]})
-        if abs(mh2_br[i_d2][2]) == abs(mh2_br[i_d2][3]) == 6:
-                dict_decay.update({'br_h2tautau':mh2_br[i_d2][0]})
-                
-    ma2_br = block_decay['46']['values']
-    for i_d3 in range(len(ma2_br)):
-        if ma2_br[i_d3][2] == ma2_br[i_d3][3] == 22:
-                dict_decay.update({'br_a2gamgam':ma2_br[i_d3][0]})
-        if ma2_br[i_d3][2] == ma2_br[i_d3][3] == 21:
-                dict_decay.update({'br_a2gluglu':ma2_br[i_d3][0]})
-        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 6:
-                dict_decay.update({'br_a2tt':ma2_br[i_d3][0]})
-        # else:
-            #  print(ma2_br)
-        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 5:
-                dict_decay.update({'br_a2bb':ma2_br[i_d3][0]})
-        if abs(ma2_br[i_d3][2]) == abs(ma2_br[i_d3][3]) == 15:
-                dict_decay.update({'br_a2tautau':ma2_br[i_d3][0]})
-        if int(ma2_br[i_d3][2]) == 25 and int(ma2_br[i_d3][3]) == 36:
-                dict_decay.update({'br_a2a1h1':ma2_br[i_d3][0]})
-        if abs(ma2_br[i_d3][2]) == 25 and  abs(ma2_br[i_d3][3]) == 23:
-                dict_decay.update({'br_a2h1z':ma2_br[i_d3][0]})
-        if abs(ma2_br[i_d3][2]) == 35 and  abs(ma2_br[i_d3][3]) == 23:
-                dict_decay.update({'br_a2h2z':ma2_br[i_d3][0]})
-        if abs(ma2_br[i_d3][2]) == 35 and  abs(ma2_br[i_d3][3]) == 36:
-                dict_decay.update({'br_a2a1h2':ma2_br[i_d3][0]})
-    return dict_decay
 
 def read_mixing(sdir):
     dict_mix = {}

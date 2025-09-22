@@ -28,17 +28,17 @@ def scanct(inp):
     k = inp[2]
     mdf.inpd(
         cba=0.0,
-        a13=0.0,
+        a13=x,
         a23=0.0,
-        a4=y,
+        a4=0.0,
         mh1=800,
         mh2=125.09,
-        mh3=1500,
+        mh3=50,
         ma1=800,
-        ma2=x,
+        ma2=1500,
         mhp=800,
         vs=246.0,
-        tb=1,
+        tb=y,
         type=2,
     )
 
@@ -69,14 +69,15 @@ if __name__ == '__main__':
         os.mkdir(ctscanf.out_add)
     os.system('rm -r '+ctscanf.out_add+'/*')
     # lx = np.linspace(10, 700, 100) # ma
-    # ly = np.linspace(-0.3, 0.3, 50) # alpha
-    ly = np.linspace(-np.pi/4, -0.1, 20) # alpha
-    ly = np.append(ly, -np.exp(np.linspace(np.log(0.1), np.log(1e-5), 5))) # alpha
-    ly = np.append(ly, np.exp(np.linspace(np.log(1e-5), np.log(0.1), 5))) # alpha
-    ly = np.append(ly, np.linspace(0.1, np.pi/4, 20)) # alpha
+    lx = np.linspace(-0.3, 0.3, 50) # alpha
+    # ly = np.linspace(-np.pi/4, -0.1, 20) # alpha
+    # ly = np.append(ly, -np.exp(np.linspace(np.log(0.1), np.log(1e-5), 5))) # alpha
+    # ly = np.append(ly, np.exp(np.linspace(np.log(1e-5), np.log(0.1), 5))) # alpha
+    # ly = np.append(ly, np.linspace(0.1, np.pi/4, 20)) # alpha
     # lx = np.linspace(150, 1000, 50) # ma
-    # ly = np.exp(np.linspace(np.log(0.1), np.log(20), 50)) # tb
-    lx = np.exp(np.linspace(np.log(10), np.log(700), 100)) # tb
+    ly = np.exp(np.linspace(np.log(0.1), np.log(20), 50)) # tb
+    # ly = [0]
+    # lx = np.exp(np.linspace(np.log(150), np.log(1000), 100)) # tb
     [X,Y] = np.meshgrid(lx, ly)
 
     shape = str(X.shape)
