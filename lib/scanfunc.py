@@ -88,7 +88,15 @@ class scan:
         self.hinput = None
         self.hinpuths = None
 
-    # def arginput(self, inp):
+    def arginput(self, inplst):
+        self.arg_bfb  = inplst['boundedness from below check']
+        self.arg_uni  = inplst['unitarity check']
+        self.arg_stu  = inplst['ew precision check']
+        self.arg_ht   = inplst['higgstools check']
+        self.arg_flv  = inplst['flavor check']
+        self.arg_vstb = inplst['evade check']
+        self.arg_dm   = inplst['micromega check']
+
 
     def SP_run(self, srcf,n):
         ############# initialize ##############

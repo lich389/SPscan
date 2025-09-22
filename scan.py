@@ -116,6 +116,7 @@ if __name__ == '__main__':
         t = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
         # scan = scf.scan(str(inp_lst['outdir']))
         scan = scf.scan("output_"+str(t)+"/")
+        scan.arginput(inp_lst)
         os.chdir(scan.memdir)
         os.mkdir(scan.out_add)
         pool = Pool(processes=n_core)              # start n worker processes
