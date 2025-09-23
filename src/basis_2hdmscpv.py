@@ -15,6 +15,8 @@ class complex:
             return np.pi/2
         elif self.re ==0 and self.im < 0:
             return -np.pi/2
+        elif self.re ==0 and self.im == 0:
+            return 0
         else:
             return np.arctan(self.im/self.re)
     def abs(self):

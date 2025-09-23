@@ -1,7 +1,7 @@
 {
     "memory":"/dev/shm/",
     "home":"/home/licheng/",
-    "scan":"Code/myscripts/sphenoscan2/",
+    "scan":"/home/licheng/Documents/myscript/git/SPscan/",
     "input_path":"/home/licheng/Documents/myscript/git/SPscan/inputs/",
     "input":"/home/licheng/Code/myscripts/sphenoscan2/inputs/input_2HDMS.json",
     "SPheno":"/home/licheng/Documents/myscript/git/SPscan/build/SPheno-4.0.5/",

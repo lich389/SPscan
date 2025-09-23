@@ -231,7 +231,7 @@ class scan:
 
     def check_ht(self, srcf):
         if self.arg_ht : 
-            self.ht_input(srcf)
+            ht_input(self,srcf)
             if self.check_hs(srcf):
                 # ht_input(srcf)
                 # oup.massoup.update(ht.excess(oup.hinput))
@@ -243,11 +243,10 @@ class scan:
 
 
 
-    def check_uni(self,srcf,method='analy'):
+    def check_uni(self,srcf):
         if self.arg_uni:
-            if method == 'analy':
-                return srcf.uni(srcf.par.params)
-            if method == 'spheno':
+            ana_check = srcf.uni(srcf.par.params)
+            if int(ana_check) == -1:
                 spc = read_spc(self.massoup['file'])
                 uni = spc['BLOCK']['TREELEVELUNITARITY']['values'][0][1]
                 triuni = spc['BLOCK']['TREELEVELUNITARITYwTRILINEARS']['values'][0][1]
@@ -255,6 +254,8 @@ class scan:
                     return True
                 else:
                     return False
+            else:
+                return ana_check
         else:
             return True
 

@@ -67,29 +67,29 @@ def bfb_mat(par, rho, theta, phi_s):
     l2p = par.l2p
     l3pp =par.l3pp
 
-    l5 = absc(par.l5)
-    l6 = absc(par.l6)
-    l7 = absc(par.l7)
-    phl6 = argc(par.l5)
-    phl5 = argc(par.l6)
-    phl7 = argc(par.l7)
+    l5 =   par.l5.abs()
+    l6 =   par.l6.abs()
+    l7 =   par.l7.abs()
+    phl6 = par.l5.abs()
+    phl5 = par.l6.abs()
+    phl7 = par.l7.abs()
 
 
-    l1pp = absc(par.l1pp)
-    l2pp = absc(par.l2pp)
-    phl1pp = argc(par.l1pp)
-    phl2pp = argc(par.l2pp)
+    l1pp = par.l1pp.abs()
+    l2pp = par.l2pp.abs()
+    phl1pp = par.l1pp.arg()
+    phl2pp = par.l2pp.arg()
 
-    l3p = absc(par.l3p)
-    l4p = absc(par.l4p)
-    l5p = absc(par.l5p)
-    l6p = absc(par.l6p)
-    l7p = absc(par.l7p)
-    phl3p = argc(par.l3p)
-    phl4p = argc(par.l4p)
-    phl5p = argc(par.l5p)
-    phl6p = argc(par.l6p)
-    phl7p = argc(par.l7p)
+    l3p = par.l3p.abs()
+    l4p = par.l4p.abs()
+    l5p = par.l5p.abs()
+    l6p = par.l6p.abs()
+    l7p = par.l7p.abs()
+    phl3p = par.l3p.arg()
+    phl4p = par.l4p.arg()
+    phl5p = par.l5p.arg()
+    phl6p = par.l6p.arg()
+    phl7p = par.l7p.arg()
 
     return [
     [

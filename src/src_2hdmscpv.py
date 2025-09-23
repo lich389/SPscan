@@ -178,4 +178,4 @@ def bfb(par):
     return np.all(lbfb)
 
 def uni(par):
-    return True
+    return -1

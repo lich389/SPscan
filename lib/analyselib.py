@@ -1,57 +1,26 @@
 import os
-import pylha
+import numpy as np
 
 def readinput(spc):
     blockpar = spc['HMIX']['values']
     blockpar2 = spc['NMSSMRUN']['values']
     dict_par = {}
     for i in range(len(blockpar)):
-        if blockpar[i][0] == 31:
-            dict_par.update({'Lambda1': blockpar[i][1]})
-        if blockpar[i][0] == 34:
-            dict_par.update({'Lambda4': blockpar[i][1]})
-        if blockpar[i][0] == 33:
-            dict_par.update({'Lambda3': blockpar[i][1]})
-        if blockpar[i][0] == 32:
-            dict_par.update({'Lambda2': blockpar[i][1]})
-        if blockpar[i][0] == 38:
-            dict_par.update({'Lambda1p': blockpar[i][1]})
-        if blockpar[i][0] == 39:
-            dict_par.update({'Lambda2p': blockpar[i][1]})
-        if blockpar[i][0] == 40:
-            dict_par.update({'Lambda3pp': blockpar[i][1]})
-        if blockpar[i][0] == 41:
-            dict_par.update({'MUS1': blockpar[i][1]})
-        if blockpar[i][0] == 42:
-            dict_par.update({'MU12': blockpar[i][1]})
-        if blockpar[i][0] == 102:
-            dict_par.update({'v1': blockpar[i][1]})
-        if blockpar[i][0] == 103:
-            dict_par.update({'v2': blockpar[i][1]})
+        if blockpar[i][0] == 10:
+            dict_par.update({'tb': np.tan(blockpar[i][1])})
+        if blockpar[i][0] == 20:
+            dict_par.update({'m11sq': blockpar[i][1]})
+        if blockpar[i][0] == 21:
+            dict_par.update({'m22sq': blockpar[i][1]})
+        if blockpar[i][0] == 23:
+            dict_par.update({'mssq': blockpar[i][1]})
         dict_par.update({'vS': blockpar2[1][1]})
     return dict_par
 
 def read_mix(zh, l='h'):
     dict_mx = {}
     for ih in range(len(zh)):
-        if zh[ih][0] == 1 and zh[ih][1] ==1:
-            dict_mx.update({'z'+l+'11': zh[ih][2]})
-        if zh[ih][0] == 1 and zh[ih][1] ==2:
-            dict_mx.update({'z'+l+'12': zh[ih][2]})
-        if zh[ih][0] == 1 and zh[ih][1] ==3:
-            dict_mx.update({'z'+l+'13': zh[ih][2]})
-        if zh[ih][0] == 2 and zh[ih][1] ==1:
-            dict_mx.update({'z'+l+'21': zh[ih][2]})
-        if zh[ih][0] == 2 and zh[ih][1] ==2:
-            dict_mx.update({'z'+l+'22': zh[ih][2]})
-        if zh[ih][0] == 2 and zh[ih][1] ==3:
-            dict_mx.update({'z'+l+'23': zh[ih][2]})
-        if zh[ih][0] == 3 and zh[ih][1] ==1:
-            dict_mx.update({'z'+l+'31': zh[ih][2]})
-        if zh[ih][0] == 3 and zh[ih][1] ==2:
-            dict_mx.update({'z'+l+'32': zh[ih][2]})
-        if zh[ih][0] == 3 and zh[ih][1] ==3:
-            dict_mx.update({'z'+l+'33': zh[ih][2]})
+            dict_mx.update({'R'+l+str(zh[ih][0])+str(zh[ih][1]): zh[ih][2]})
 
     return dict_mx
 
@@ -75,89 +44,22 @@ def read_mass(block_mass):
 def read_coupling_boson(block_coupl):
     dict_coup = {}
     for i_c in range(len(block_coupl)):
-        if block_coupl[i_c][2] == 25 and block_coupl[i_c][1] ==3:
-            #h1_coup
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 24:
-                dict_coup.update({'c_h1WW':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 23:
-                dict_coup.update({'c_h1ZZ':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 22:
-                dict_coup.update({'c_h1gamgam':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 21:
-                dict_coup.update({'c_h1gluglu':block_coupl[i_c][0]})
-        if block_coupl[i_c][2] == 35 and block_coupl[i_c][1] ==3:
-            #h2_coup
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 24:
-                dict_coup.update({'c_h2WW':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 23:
-                dict_coup.update({'c_h2ZZ':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 22:
-                dict_coup.update({'c_h2gamgam':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 21:
-                dict_coup.update({'c_h2gluglu':block_coupl[i_c][0]})
-        if block_coupl[i_c][2] == 45 and block_coupl[i_c][1] ==3:
-            #h3_coup
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 24:
-                dict_coup.update({'c_h3WW':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 23:
-                dict_coup.update({'c_h3ZZ':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 22:
-                dict_coup.update({'c_h3gamgam':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 21:
-                dict_coup.update({'c_h3gluglu':block_coupl[i_c][0]})
-        if block_coupl[i_c][2] == 36 and block_coupl[i_c][1] ==3:
-            #a1_coup
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 22:
-                dict_coup.update({'c_a1gamgam':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 21:
-                dict_coup.update({'c_a1gluglu':block_coupl[i_c][0]})
-        if block_coupl[i_c][2] == 46 and block_coupl[i_c][1] ==3:
-            #a2_coup
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 22:
-                dict_coup.update({'c_a2gamgam':block_coupl[i_c][0]})
-            if block_coupl[i_c][3] == block_coupl[i_c][4] == 21:
-                dict_coup.update({'c_a2gluglu':block_coupl[i_c][0]})
+        if block_coupl[i_c][1] == 3:
+            pdgh = get_id(abs(int(block_coupl[i_c][2])))
+            pdg1 = get_id(abs(int(block_coupl[i_c][3])))
+            pdg2 = get_id(abs(int(block_coupl[i_c][4])))
+            dict_coup.update({'c_'+pdgh+pdg1+pdg2:block_coupl[i_c][0]})
     return dict_coup
 
 
 def read_coupling_fermion(block_coupl):
     dict_coup = {}
     for i_c in range(len(block_coupl)):
-        if block_coupl[i_c][3] == 25 and block_coupl[i_c][2] ==3:
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 5:
-                dict_coup.update({'c_h1bb':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 6:
-                dict_coup.update({'c_h1tt':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 15:
-                dict_coup.update({'c_h1tautau':block_coupl[i_c][0]})
-        if block_coupl[i_c][3] == 35 and block_coupl[i_c][2] ==3:
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 5:
-                dict_coup.update({'c_h2bb':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 6:
-                dict_coup.update({'c_h2tt':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 15:
-                dict_coup.update({'c_h2tautau':block_coupl[i_c][0]})
-        if block_coupl[i_c][3] == 45 and block_coupl[i_c][2] ==3:
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 5:
-                dict_coup.update({'c_h3bb':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 6:
-                dict_coup.update({'c_h3tt':block_coupl[i_c][0]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 15:
-                dict_coup.update({'c_h3tautau':block_coupl[i_c][0]})
-        if block_coupl[i_c][3] == 36 and block_coupl[i_c][2] ==3:
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 5:
-                dict_coup.update({'c_a1bb':block_coupl[i_c][1]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 6:
-                dict_coup.update({'c_a1tt':block_coupl[i_c][1]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 15:
-                dict_coup.update({'c_a1tautau':block_coupl[i_c][1]})
-        if block_coupl[i_c][3] == 46 and block_coupl[i_c][2] ==3:
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 5:
-                dict_coup.update({'c_a2bb':block_coupl[i_c][1]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 6:
-                dict_coup.update({'c_a2tt':block_coupl[i_c][1]})
-            if block_coupl[i_c][4] == block_coupl[i_c][5] == 15:
-                dict_coup.update({'c_a2tautau':block_coupl[i_c][1]})
+        pdgh = get_id(abs(int(block_coupl[i_c][3])))
+        pdg1 = get_id(abs(int(block_coupl[i_c][4])))
+        pdg2 = get_id(abs(int(block_coupl[i_c][5])))
+        dict_coup.update({'c_'+pdgh+pdg1+pdg2:block_coupl[i_c][0]})
+        dict_coup.update({'ctd_'+pdgh+pdg1+pdg2:block_coupl[i_c][1]})
     return dict_coup
 
 
@@ -225,7 +127,7 @@ def read_decay(decay):
 
 
 
-def read_mixing(sdir):
+def read_angle(sdir):
     dict_mix = {}
     if os.path.isfile(sdir+"/mixinginput.csv"):
         mxi = open(sdir+"/mixinginput.csv", "r")
@@ -235,3 +137,42 @@ def read_mixing(sdir):
             dict_mix.update({'Alpha'+str(ai+1): float(lst_mxi[ai])})
         mxi.close()
     return dict_mix
+
+import math
+def cpvphase(dict):
+    cpvh1tt =    math.atan(dict['ctd_h1tt']/dict['c_h1tt'])
+    cpvh2tt =    math.atan(dict['ctd_h2tt']/dict['c_h2tt'])
+    cpvh3tt =    math.atan(dict['ctd_h3tt']/dict['c_h3tt'])
+    cpvh1tautau =math.atan(dict['ctd_h1tautau']/dict['c_h1tautau'])
+    cpvh2tautau =math.atan(dict['ctd_h2tautau']/dict['c_h2tautau'])
+    cpvh3tautau =math.atan(dict['ctd_h3tautau']/dict['c_h3tautau'])
+    if dict['c_a1tt'] == 0:
+        cpva1tt = math.pi/2
+    else:
+        cpva1tt =    math.atan(dict['ctd_a1tt']/dict['c_a1tt'])
+    if dict['c_a1tautau'] == 0:
+        cpva1tautau = math.pi/2
+    else:
+        cpva1tautau =math.atan(dict['ctd_a1tautau']/dict['c_a1tautau'])
+
+    if dict['c_a2tt'] == 0:
+        cpva2tt = math.pi/2
+    else:
+        cpva2tt =    math.atan(dict['ctd_a2tt']/dict['c_a2tt'])
+    if dict['c_a2tautau'] == 0:
+        cpva2tautau = math.pi/2
+    else:
+        cpva2tautau =math.atan(dict['ctd_a2tautau']/dict['c_a2tautau'])
+
+    return {'cpvh1tt': math.sin(2*cpvh1tt), 
+            'cpvh1tautau': math.sin(2*cpvh1tautau), 
+            'cpvh2tt': math.sin(2*cpvh2tt), 
+            'cpvh2tautau': math.sin(2*cpvh2tautau), 
+            'cpvh3tt': math.sin(2*cpvh3tt),
+            'cpvh3tautau': math.sin(2*cpvh3tautau),
+            'cpva1tt': math.sin(2*cpva1tt),
+            'cpva1tautau': math.sin(2*cpva1tautau),
+            'cpva2tt': math.sin(2*cpva2tt),
+            'cpva2tautau': math.sin(2*cpva2tautau),}
+
+
