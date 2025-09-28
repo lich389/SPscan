@@ -1,6 +1,6 @@
 import numpy as np
 import json
-from lib import utilities as uti
+from lib import scanfunc as scf
 from src import STU_2hdms as stu
 
 from lib import input as ifunc
@@ -20,10 +20,6 @@ class par:
 
 
 
-
-
-
-
 def ran_inp(inpf):
 #     -SET RANDOM SCAN PARAMETERS--
 #     # generate the random inputs
@@ -31,7 +27,7 @@ def ran_inp(inpf):
     tb = ifunc.para_inp(inp['tb'])
     cba12 = ifunc.para_inp(inp['cba'])
     a12 = np.arctan(tb) - np.arccos(cba12)
-    inp = bc.input(a12=a12,
+    inpset = bc.input(a12=a12,
                 a13 = ifunc.para_inp(inp['a13']),
                 a23 = ifunc.para_inp(inp['a23']),
                 a14 = ifunc.para_inp(inp['a14']),
@@ -54,8 +50,10 @@ def ran_inp(inpf):
                 xis = ifunc.para_inp(inp['xis']),
                 type = int(inp['type']),
                    )
+    inpset.mu12 = bc.complex(ifunc.para_inp(inp['mu12']['re']), ifunc.para_inp(inp['mu12']['im']))
+    inpset.mus1 = bc.complex(ifunc.para_inp(inp['mus1']['re']), ifunc.para_inp(inp['mus1']['im']))
 
-    initinp(inp)
+    initinp(inpset)
     # print(par.minpar)
 
     # return vs, par.tb, a12, a13, a23, a4, mh1, mh2, mh3, ma1, ma2, mp, mutild
@@ -179,3 +177,36 @@ def bfb(par):
 
 def uni(par):
     return -1
+
+def ewp_check(parini, scanf):
+            spc = scf.read_spc(scanf.massoup['file'])
+            Tobs = spc['BLOCK']['SPhenoLowEnergy']['values'][0][1]
+            Sobs = spc['BLOCK']['SPhenoLowEnergy']['values'][1][1]
+            Uobs = spc['BLOCK']['SPhenoLowEnergy']['values'][2][1]
+            s_exp = -0.04
+            t_exp = 0.01
+            u_exp = -0.01
+                
+            ds = 0.1
+            dt = 0.12
+            du = 0.09
+            cst = 0.93
+            csu = -0.7
+            ctu = -0.87
+
+            cov = np.array([[ds**2, ds*dt*cst, ds*du*csu],[ds*dt*cst, dt**2, dt*du*ctu], [ds*du*csu, dt*du*ctu, du**2]])
+            stu = np.array([[Sobs-s_exp],[Tobs-t_exp],[Uobs-u_exp]])
+            stuT = stu.transpose()
+            stuchi2 = np.matmul(stuT, np.matmul(np.linalg.inv(cov), stu) )[0][0]
+
+            oup.stu.update({'stuchi2':stuchi2})
+
+            t_ref = -2.04101372E-02
+            s_ref = 2.95784468E-02
+            u_ref = -1.11736496E-03
+            stu_ref = np.array([[s_ref-s_exp],[t_ref-t_exp],[u_ref-u_exp]])
+            chi2ref = np.matmul(stu_ref.transpose(), np.matmul(np.linalg.inv(cov), stu_ref) )[0][0] 
+
+            delchi2 = stuchi2-chi2ref
+            oup.stu.update({'stu_delchi2':delchi2})
+            return delchi2<5.99

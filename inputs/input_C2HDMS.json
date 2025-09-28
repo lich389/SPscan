@@ -1,6 +1,6 @@
 {
 	"model":"c2hdms",
-	"outdir":"/home/licheng/Documents/myscript/git/SPscan/build/test/",
+	"outdir":"/home/licheng/Documents/myscript/SPscan/build/test/",
 	"n_threads":30,
 	"n_exp":1,
 	"mh2":
@@ -12,8 +12,8 @@
 	"mh1":
 	{
 		"arg":"random",
-		"min":200.0,
-		"max":200.0
+		"min":835.0,
+		"max":835.0
 	},
 	"mh3":
 	{
@@ -24,33 +24,33 @@
 	"mh4":
 	{
 		"arg":"random",
-		"min":250.0,
-		"max":250.0
+		"min":825.0,
+		"max":825.0
 	},
 	"mh5":
 	{
 		"arg":"random",
-		"min":400,
-		"max":400,
+		"min":250,
+		"max":250,
 		"dmas":130
 	},
 	"mp":
 	{
 		"arg":"random",
-		"min":200.0,
-		"max":200.0
+		"min":800.0,
+		"max":800.0
 	},
 	"mutild":
 	{
 		"arg":"random",
-		"min":200.0,
-		"max":200.0
+		"min":803.0,
+		"max":803.0
 	},
 	"tb":
 	{
 		"arg":"random",
-		"min":10.0,
-		"max":10.0,
+		"min":1.5,
+		"max":1.5,
 		"num":10
 	},
 	"vs":
@@ -63,26 +63,27 @@
 	"cba":
 	{
 		"arg":"random",
-		"min":-0.0,
-		"max":0.00
+		"min":0.015,
+		"max":0.015
 	},
 	"a13":
 	{
 		"arg":"random",
-		"min":0.0,
-		"max":0.0
+		"min":-0.00,
+		"max":-0.00
 	},
 	"a23":
 	{
 		"arg":"random",
-		"min":0.0,
-		"max":0.0
+		"ransign":1,
+		"min":0.35,
+		"max":0.35
 	},
 	"a14":
 	{
 		"arg":"random",
-		"min":-0.5,
-		"max":-0.5
+		"min":-0.0,
+		"max":0.0
 	},
 	"a24":
 	{
@@ -93,19 +94,19 @@
 	"a34":
 	{
 		"arg":"random",
-		"min":-0.0,
-		"max":0.0
+		"min":-0.085,
+		"max":-0.085
 	},
 	"a15":
 	{
 		"arg":"random",
-		"min":0.0,
+		"min":-0.0,
 		"max":0.0
 	},
 	"a25":
 	{
 		"arg":"random",
-		"min":0.0,
+		"min":-0.0,
 		"max":0.0
 	},
 	"a35":
@@ -117,9 +118,36 @@
 	"a45":
 	{
 		"arg":"random",
-		"min":0.0,
+		"min":-0.0,
 		"max":0.0
 	},
+	"mu12":
+	{"re":
+		{
+			"arg":"random",
+			"min":-0.0,
+			"max":0.0
+		},
+	"im":
+		{
+			"arg":"random",
+			"min":-230.0,
+			"max":-230.0
+		}
+	},
+	"mus1":
+	{"re":
+	{
+		"arg":"random",
+		"min":-0.0,
+		"max":0.0
+	},
+	"im":
+	{
+		"arg":"random",
+		"min":-40.0,
+		"max":-40.0
+	}},
 	"xi1":
 	{
 		"arg":"random",
@@ -152,11 +180,11 @@
 		"max":-1
 	},
 
-    "unitarity check": 0,
-    "boundedness from below check": 0,
-    "ew precision check": 0,
-    "higgstools check": 0,
-    "flavor check": 0,
+    "unitarity check": 1,
+    "boundedness from below check": 1,
+    "ew precision check": 1,
+    "higgstools check": 1,
+    "flavor check": 1,
     "evade check": 0,
     "micromega check": 0,
     "print check": 0,

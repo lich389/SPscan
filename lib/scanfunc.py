@@ -192,33 +192,33 @@ class scan:
         })
         return hscheck
 
-    def check_stu(self,srcf, method = 'analy'):
+    def check_stu(self,srcf):
         if self.arg_stu:
-            if method == 'analy':
-                res = srcf.ewp_check(srcf.par)
+            # if method == 'analy':
+                res = srcf.ewp_check(srcf.par, self)
                 self.constoup.update(srcf.oup.stu)
                 return res
-            if method == 'spheno':
-                spc = read_spc(self.massoup['file'])
-                Tobs = spc['BLOCK']['SPhenoLowEnergy']['values'][0][1]
-                Sobs = spc['BLOCK']['SPhenoLowEnergy']['values'][1][1]
-                Uobs = spc['BLOCK']['SPhenoLowEnergy']['values'][2][1]
-                s_exp = -0.04
-                t_exp = 0.01
-                u_exp = -0.01
+            # if method == 'spheno':
+            #     spc = read_spc(self.massoup['file'])
+            #     Tobs = spc['BLOCK']['SPhenoLowEnergy']['values'][0][1]
+            #     Sobs = spc['BLOCK']['SPhenoLowEnergy']['values'][1][1]
+            #     Uobs = spc['BLOCK']['SPhenoLowEnergy']['values'][2][1]
+            #     s_exp = -0.04
+            #     t_exp = 0.01
+            #     u_exp = -0.01
                     
-                ds = 0.1
-                dt = 0.12
-                du = 0.09
-                cst = 0.93
-                csu = -0.7
-                ctu = -0.87
+            #     ds = 0.1
+            #     dt = 0.12
+            #     du = 0.09
+            #     cst = 0.93
+            #     csu = -0.7
+            #     ctu = -0.87
 
-                cov = np.array([[ds**2, ds*dt*cst, ds*du*csu],[ds*dt*cst, dt**2, dt*du*ctu], [ds*du*csu, dt*du*ctu, du**2]])
-                stu = np.array([[Sobs-s_exp],[Tobs-t_exp],[Uobs-u_exp]])
-                stuT = stu.transpose()
-                stuchi2 = np.matmul(stuT, np.matmul(np.linalg.inv(cov), stu) )[0][0]
-                return stuchi2 < 5.99
+            #     cov = np.array([[ds**2, ds*dt*cst, ds*du*csu],[ds*dt*cst, dt**2, dt*du*ctu], [ds*du*csu, dt*du*ctu, du**2]])
+            #     stu = np.array([[Sobs-s_exp],[Tobs-t_exp],[Uobs-u_exp]])
+            #     stuT = stu.transpose()
+            #     stuchi2 = np.matmul(stuT, np.matmul(np.linalg.inv(cov), stu) )[0][0]
+            #     return stuchi2 < 5.99
         else:
             return True
     def check_flavor(self):
@@ -232,9 +232,7 @@ class scan:
     def check_ht(self, srcf):
         if self.arg_ht : 
             ht_input(self,srcf)
-            if self.check_hs(srcf):
-                # ht_input(srcf)
-                # oup.massoup.update(ht.excess(oup.hinput))
+            if self.check_hs(srcf, q=False):
                 return ht.hb(self.hinput, self.hb_dir,  arg=True)
             else:
                 return False

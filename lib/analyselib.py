@@ -124,18 +124,15 @@ def read_decay(decay):
     
     return dict_width
     
-
+import json
 
 
 def read_angle(sdir):
     dict_mix = {}
-    if os.path.isfile(sdir+"/mixinginput.csv"):
-        mxi = open(sdir+"/mixinginput.csv", "r")
-        str_mxi = mxi.readline()
-        lst_mxi = str_mxi.split(",")
-        for ai in range(len(lst_mxi)):
-            dict_mix.update({'Alpha'+str(ai+1): float(lst_mxi[ai])})
-        mxi.close()
+    if os.path.isfile(sdir+"/masspar.json"):
+        msp = json.load(open(sdir+"/masspar.json"))
+        dict_mix.update({'a14': float(msp['a14'])})
+        dict_mix.update({'a34': float(msp['a34'])})
     return dict_mix
 
 import math
@@ -175,4 +172,29 @@ def cpvphase(dict):
             'cpva2tt': math.sin(2*cpva2tt),
             'cpva2tautau': math.sin(2*cpva2tautau),}
 
+def excess95(dict_spc):
 
+    mugaga = dict_spc['c_h1gg']**2 * dict_spc['br_h1_gamgam']/0.00139
+    mulep = dict_spc['c_h1ZZ']**2 * dict_spc['br_h1_bb']/0.802
+        # mutata = dict_spc['c_h1tt']**2 * dict_spc['br_h1tautau']/0.0832
+    if mugaga < 0.33:
+        chicms = (mugaga-0.33)/(-0.12)
+    else:
+        chicms = (mugaga-0.33)/(0.19)
+    chiatlas = (mulep-0.18)/0.1
+    if mugaga < 0.24:
+        chigaga = (mugaga-0.24)/(-0.08)
+    else:
+        chigaga = (mugaga-0.24)/(0.09)
+    chilep = (mulep-0.117)/0.057
+    # chitata = (mutata-1.2)/0.5
+    muchi2 = chigaga**2 + chilep**2
+    return {
+        'muLHC':mugaga,
+        'muLEP':mulep,
+        # ({'mutata':mutata})
+        'muchi2':muchi2}
+
+
+def filter(df):
+    return df[df['muchi2'] < 2.31]

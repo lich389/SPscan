@@ -35,7 +35,10 @@ class inpmeth:
     
 def para_inp(par):
     if par['arg'] == 'random':
-        return random.uniform(par['min'], par['max'])#*ransgn(par['ransgn'])
+        if 'ransign' in par:
+            return ransgn()*random.uniform(par['min'], par['max'])#*ransgn(par['ransgn'])
+        else:
+            return random.uniform(par['min'], par['max'])#*ransgn(par['ransgn'])
     if par['arg'] == 'grid':
         return random.choice(np.linspace(par['min'], par['max'], num = par['num']))
     if par['arg'] == 'gauss':
@@ -53,4 +56,3 @@ def para_inp(par):
 # print(p1, p2)
 
 
-# %%

@@ -139,7 +139,7 @@ class oup:
 
 
 
-def ewp_check(parini):
+def ewp_check(parini,scanf):
     par = parini.params
     res_stu = stu.STUchk(par.mh1, par.mh2, par.mh3, par.ma1, par.ma2, par.mhp, par.tb, par.a12, par.a13, par.a23, par.a4)
     # print(stu.STU.chi2)
