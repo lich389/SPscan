@@ -59,6 +59,7 @@ def move_result(result_name,res_loc):
         os.rmdir(result_name+'/'+lst_out)
 
 spset = 'SPhenoInput'
+spset_mg = 'SPhenoInput_MG'
 
 class scan:
     def __init__(self,oup, pref = json.load(open('prefix.json'))):
@@ -158,6 +159,50 @@ class scan:
 
 
 
+    def SP_mgrun(self, srcf,n):
+        da_inp = srcf.par.minpar
+        da_extp = srcf.par.extpar
+        model = srcf.spn
+        lhinp = read_spc(self.inp_dir + 'LesHouches.in.'+model)
+        # Check whether all minpar are provided
+        if len(lhinp['BLOCK']['MINPAR']['values']) != len(da_inp):
+            print('invalid input')
+            sys.exit(1)
+        # Give the input to LesHouches input
+        for park in da_inp.keys():
+            for ip_p in range(len(lhinp['BLOCK']['MINPAR']['values'])):
+                if lhinp['BLOCK']['MINPAR']['values'][ip_p][0] == da_inp[park]['pdg']:
+                    lhinp['BLOCK']['MINPAR']['values'][ip_p][1] = da_inp[park]['value']
+        # print((lhinp['BLOCK']['MINPAR']['values']))
+        # give extra parameters
+        if da_extp != None:
+            for parek in da_extp.keys():
+                for ip_p in range(len(lhinp['BLOCK']['EXTPAR']['values'])):
+                    if lhinp['BLOCK']['EXTPAR']['values'][ip_p][0] == da_extp[parek]['pdg']:
+                        lhinp['BLOCK']['EXTPAR']['values'][ip_p][1] = da_extp[parek]['value']
+
+        # Run SPheno
+        if os.path.isfile(self.out_add +'/' + str(n)+"/SPheno.spc."+model):
+            os.chdir(self.out_add +'/'+ str(n))
+            write_input('./LesHouches.in.'+model+str(n)+'mg', self.inp_dir + spset_mg, lhinp)
+            os.system("mv ./SPheno.spc."+model+ " ./SPheno.spc."+model+"_0")
+
+            os.system(self.sp_dir+'bin/SPheno'+model+' '+'./LesHouches.in.'+model+str(n)+'mg'+" | grep -q \"string\"")
+            os.system("mv ./SPheno.spc."+model+ " ./SPheno.spc."+model+".mg5")
+            os.system("mv ./SPheno.spc."+model+ "_0 ./SPheno.spc."+model)
+
+        else:
+            os.chdir(self.out_add)
+            os.mkdir(self.out_add +'/' + str(n))
+            os.chdir(self.out_add +'/'+ str(n))
+            write_input('./LesHouches.in.'+model+str(n)+'mg', self.inp_dir + spset_mg, lhinp)
+            os.system(self.sp_dir+'bin/SPheno'+model+' '+'./LesHouches.in.'+model+str(n)+'mg'+" | grep -q \"string\"")
+            os.system("mv /SPheno.spc."+model+ " /SPheno.spc."+model+".mg5")
+
+        # os.system('mv '+'/dev/shm/LesHouches.in.'+model+str(n)+' '+out_add+'/' + str(n))
+        # os.system('rm '+'/dev/shm/LesHouches.in.'+model+str(n))
+        os.chdir(self.out_add)
+            
 
 
     def check_hb(self, srcf, q=False):
