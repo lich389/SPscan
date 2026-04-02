@@ -10,28 +10,28 @@ make Model=2HDMS/
 cp -r ../../Repository/C2HDMS/EWSB/SPheno C2HDMS/
 make Model=C2HDMS/
 
-# cd ..
-# git clone https://gitlab.com/higgsbounds/hbdataset.git
-# git clone https://gitlab.com/higgsbounds/hsdataset.git
+cd ..
+git clone https://gitlab.com/higgsbounds/hbdataset.git
+git clone https://gitlab.com/higgsbounds/hsdataset.git
 # git https://gitlab.com/higgsbounds/higgstools.git
 # cd higgstools
 # pip install .
 # cd ..
 
 # Generate prefix.json
-cd ../..
+cd ..
 SCAN_DIR="$(pwd)"
 HOME_DIR="$HOME"
 MEMORY="/dev/shm/"
 SPHENO_DIR="$SCAN_DIR/build/SPheno-4.0.5/"
 INPUT_PATH="$SCAN_DIR/inputs/"
 INPUT_FILE="$SCAN_DIR/inputs/input_2HDMS.json"
+HBDATASET_DIR="$SCAN_DIR/build/hbdataset/"
+HSDATASET_DIR="$SCAN_DIR/build/hsdataset/"
 
 # Default paths for other dependencies (modify as needed)
-MICROMEGA_DIR="/home/licheng/Code/micromegas_5.2.13/complexZ2bDM/"
-HBDATASET_DIR="/home/licheng/Code/hbdataset/"
-HSDATASET_DIR="/home/licheng/Code/hsdataset/"
-EVADE_DIR="/home/licheng/Code/EVADE/build/"
+MICROMEGA_DIR="$HOME/micromegas_5.2.13/complexZ2bDM/"
+EVADE_DIR="$HOME/EVADE/build/"
 
 cat > prefix.json << EOF
 {
