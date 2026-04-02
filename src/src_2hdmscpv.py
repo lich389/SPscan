@@ -27,6 +27,17 @@ def ran_inp(inpf):
     tb = ifunc.para_inp(inp['tb'])
     cba12 = ifunc.para_inp(inp['cba'])
     a12 = np.arctan(tb) - np.arccos(cba12)
+    # inpset.mu12 = bc.complex(ifunc.para_inp(inp['mu12']['re']), ifunc.para_inp(inp['mu12']['im']))
+    # inpset.mus1 = bc.complex(ifunc.para_inp(inp['mus1']['re']), ifunc.para_inp(inp['mus1']['im']))
+    immu12 = ifunc.para_inp(inp['mu12']['im'])
+    mh1 = ifunc.para_inp(inp['mh1'])
+    mh2 = ifunc.para_inp(inp['mh2'])
+    mh3 = ifunc.para_inp(inp['mh3'])
+    mh4 = ifunc.para_inp(inp['mh4'])
+    mh5 = ifunc.para_inp(inp['mh5'])
+    a34 = np.arcsin(-2*immu12*v/(mh3**2 - mh4**2))/2
+    a15 = np.arcsin(-2*immu12*v*np.sin(2*np.arctan(tb))/(mh1**2 - mh5**2))/2
+    a25 = np.arcsin(-2*immu12*v*np.cos(2*np.arctan(tb))/(mh2**2 - mh5**2))/2
     inpset = bc.input(a12=a12,
                 a13 = ifunc.para_inp(inp['a13']),
                 a23 = ifunc.para_inp(inp['a23']),
@@ -50,14 +61,59 @@ def ran_inp(inpf):
                 xis = ifunc.para_inp(inp['xis']),
                 type = int(inp['type']),
                    )
-    inpset.mu12 = bc.complex(ifunc.para_inp(inp['mu12']['re']), ifunc.para_inp(inp['mu12']['im']))
-    inpset.mus1 = bc.complex(ifunc.para_inp(inp['mus1']['re']), ifunc.para_inp(inp['mus1']['im']))
 
     initinp(inpset)
     # print(par.minpar)
 
     # return vs, par.tb, a12, a13, a23, a4, mh1, mh2, mh3, ma1, ma2, mp, mutild
 
+def inpd(cba = 0,
+                a13 = 0.0,
+                a23 = 0.0,
+                a14 = 0.0,
+                a24 = 0.0,
+                a34 = 0.0,
+                a15 = 0.0,
+                a25 = 0.0,
+                a35 = 0.0,
+                a45 = 0.0,
+                mh1 = 0.0,
+                mh2 = 0.0,
+                mh3 = 0.0,
+                mh4 = 0.0,
+                mh5 = 0.0,
+                mhc = 0.0,
+                mut = 0.0,
+                tb  = 1,
+                vs = 0.0,
+                xi = 0.0,
+                xis =0.0,
+         type = 2):
+    a12 = np.arctan(tb) - np.arccos(cba)
+    inpset = bc.input(a12=a12,
+                a13 = a13,
+                a23 = a23,
+                a14 = a14,
+                a24 = a24,
+                a34 = a34,
+                a15 = a15,
+                a25 = a25,
+                a35 = a35,
+                a45 = a45,
+                mh1 = mh1,
+                mh2 = mh2,
+                mh3 = mh3,
+                mh4 = mh4,
+                mh5 = mh5,
+                mhc = mhc,
+                mut = mut,
+                tb  = tb,
+                vs = vs,
+                xi = xi,
+                xis = xis,
+                type = type,)
+
+    initinp(inpset)
 
 def initinp(inp):
     inp.basischange()
@@ -124,6 +180,7 @@ def initinp(inp):
         "xi1":inp.eta,
         "xis":inp.zeta,
         "a12":inp.a12,
+        "cba12":np.cos(np.arctan(inp.tb)-inp.a12),
         "a13":inp.a13,
         "a23":inp.a23,
         "a14":inp.a14,
@@ -139,7 +196,13 @@ def initinp(inp):
         "ma1":inp.mh4,
         "ma2":inp.mh5,
         "mhp":inp.mhp,
-        "mutild":inp.mut
+        "mutild":inp.mut,
+        "mu11":[inp.mu11.Re(), inp.mu11.Im()],
+        "mu12":[inp.mu12.Re(), inp.mu12.Im()],
+        "mu21":[inp.mu21.Re(), inp.mu21.Im()],
+        "mu22":[inp.mu22.Re(), inp.mu22.Im()],
+        "mus1":[inp.mus1.Re(), inp.mus1.Im()],
+        "mus2":[inp.mus2.Re(), inp.mus2.Im()],
     })
     par.params = inp
 

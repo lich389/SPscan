@@ -33,7 +33,7 @@ class complex:
 
 class input:
     def __init__(self,a12, a13, a23, a14, a24, a34, a15, a25, a35, a45,mh1,mh2,mh3,mh4,mh5,mhc,mut,tb,vs,xi,xis,type,
-                 iml5 = 0, rel6 = 0, rel7 = 0, rel1pp = 0, rel4p = 0, rel5p = 0, iml7p = 0):
+                 iml5 = 0, rel6 = 0, rel7 = 0, rel1pp = 0, iml1pp=0, rel4p = 0, rel5p = 0, iml7p = 0,remsp = 0):
         self.v = 246.2205691
         self.a12 = a12
         self.a13 = a13
@@ -62,18 +62,21 @@ class input:
         self.rel6 = rel6
         self.rel7 = rel7
         self.rel1pp = rel1pp
+        self.iml1pp = iml1pp
         self.rel4p = rel4p
         self.rel5p = rel5p
-        self.iml7p = iml7p
+        # self.iml7p = iml7p
+        self.remsp = remsp
 
         self.l2pp= complex(0,0)
         self.l3p = complex(0,0)
         self.l6p = complex(0,0)
+        self.l7p = complex(0,0)
         self.mu11= complex(0,0)
-        self.mu12= complex(0,0)
+        # self.mu12= complex(0,0)
         self.mu21= complex(0,0)
         self.mu22= complex(0,0)
-        self.mus1= complex(0,0)
+        # self.mus1= complex(0,0)
         self.mus2= complex(0,0)
 
 
@@ -173,73 +176,106 @@ class input:
         l2ppc = self.l2pp.phse(2*self.zeta)
         l3pc =  self.l3p.phse(-self.eta)
         l6pc =  self.l6p.phse(2*self.zeta-self.eta)
-        mu12c = self.mu12.phse((self.zeta-self.eta))
+        l7pc =  self.l7p.phse(2*self.zeta+self.eta)
+        # mu12c = self.mu12.phse((self.zeta-self.eta))
         mu21c = self.mu21.phse((self.zeta+self.eta))
         mu11c = self.mu11.phse((self.zeta))
         mu22c = self.mu22.phse((self.zeta))
-        mus1c = self.mus1.phse((3*self.zeta))
+        # mus1c = self.mus1.phse((3*self.zeta))
         mus2c = self.mus2.phse((self.zeta))
 
         rel2pp = l2ppc.Re()
         rel3p  =  l3pc.Re()
         rel6p  =  l6pc.Re()
-        remu12 = mu12c.Re()
+        rel7p  =  l7pc.Re()
+        # remu12 = mu12c.Re()
         remu21 = mu21c.Re()
         remu11 = mu11c.Re()
         remu22 = mu22c.Re()
-        remus1 = mus1c.Re()
+        # remus1 = mus1c.Re()
         remus2 = mus2c.Re()
 
-        immu12 = mu12c.Im()
+        # immu12 = mu12c.Im()
         immu21 = mu21c.Im()
         immu11 = mu11c.Im()
         immu22 = mu22c.Im()
-        immus1 = mus1c.Im()
+        # immus1 = mus1c.Im()
         immus2 = mus2c.Im()
         iml2pp = l2ppc.Im()
         iml3p  =  l3pc.Im()
         iml6p  =  l6pc.Im()
+        iml7p  =  l7pc.Im()
 
 
         def Csc(x):
             return 1/np.sin(x)
 
-        rel7p = (self.m45sq + remu12*self.v - remu21*self.v + 2*rel6p*self.v*self.vS)/(2.*self.v*self.vS)
+        # -------- m45sq relation -----------
+        # rel7p = (self.m45sq + remu12*self.v - remu21*self.v + 2*rel6p*self.v*self.vS)/(2.*self.v*self.vS)
+        remu12 = -(self.m45sq  - remu21*self.v + 2*rel6p*self.v*self.vS - rel7p*(2.*self.v*self.vS))/self.v
+
+        # --------- m12sq relation -----------
         rem12 = (self.mutild*self.tb)/(1 + self.tb**2) + self.vS*(remu12 + remu21 + (rel3p + rel6p + rel7p)*self.vS)
         self.l1 = (2*self.m11sq*(1 + self.tb**2) + self.tb*(-2*self.mutild*self.tb + (-3*self.rel6 + self.rel7*self.tb**2)*self.v**2))/(2.*self.v**2)
+
+        # --------- m22sq relation -----------
         self.l2 = (-4*self.mutild*self.tb + 4*self.m22sq*(self.tb + self.tb**3) + 2*(self.rel6 - 3*self.rel7*self.tb**2)*self.v**2)/((1 + self.tb**2)*self.v**2*(3*self.tb - np.sqrt(1 + self.tb**2)*np.sin(3*np.arctan(self.tb))))
         rel5 = ((-4*self.m44sq*self.tb + 4*self.mutild*self.tb - 2*self.rel6*self.v**2 - self.rel7*self.v**2 - self.rel7*self.tb**2*self.v**2 + self.rel7*(1 + self.tb**2)*self.v**2*np.cos(2*np.arctan(self.tb)))*Csc(2*np.arctan(self.tb)))/(2.*(1 + self.tb**2)*self.v**2)
+
+        # -------- m12sq and mhcsq relation -----------
         self.l4 = -rel5 - self.rel6/self.tb - self.rel7*self.tb - (2*self.mhcsq)/self.v**2 + (2*self.mutild)/self.v**2
         self.l3 = ((4*self.m12sq + 4*self.mutild*self.tb + 4*self.m12sq*self.tb**2 - 6*self.rel6*self.v**2 - 3*self.rel7*self.v**2 - 4*(self.l4 + rel5)*self.tb*self.v**2 - 3*self.rel7*self.tb**2*self.v**2 + 3*self.rel7*(1 + self.tb**2)*self.v**2*np.cos(2*np.arctan(self.tb)))*Csc(2*np.arctan(self.tb)))/(2.*(1 + self.tb**2)*self.v**2)
 
-        self.l3pp = ((3*remu11*self.v**2)/(1 + self.tb**2) + (3*remu12*self.tb*self.v**2)/(1 + self.tb**2) + (3*remu21*self.tb*self.v**2)/(1 + self.tb**2) + (3*remu22*self.tb**2*self.v**2)/(1 + self.tb**2) + 3*self.m33sq*self.vS - 3*remus1*self.vS**2 - 9*remus2*self.vS**2 - 2*self.rel1pp*self.vS**3 - 8*rel2pp*self.vS**3)/(6.*self.vS**3)
+
+        # -------- m13sq relation -----------
         self.l1p = (self.m13sq*np.sqrt(1 + self.tb**2) - self.v*(2*remu11 + remu12*self.tb + remu21*self.tb + 4*self.rel4p*self.vS + 2*rel3p*self.tb*self.vS + 2*rel6p*self.tb*self.vS + 2*rel7p*self.tb*self.vS))/(2.*self.v*self.vS)
+
+        # -------- m23sq relation -----------
         self.l2p = (self.m23sq*np.sqrt(1 + self.tb**2) - self.v*(remu12 + remu21 + 2*remu22*self.tb + 2*(rel3p + rel6p + rel7p + 2*self.rel5p*self.tb)*self.vS))/(2.*self.tb*self.v*self.vS)
 
-        remsp = (-self.m55sq - 2*self.rel5p*self.v**2 - (4*self.rel4p*self.v**2)/(1 + self.tb**2) - (remu11*self.v**2)/(2.*self.vS) - (remu22*self.v**2)/(2.*self.vS) - 3*remus1*self.vS - remus2*self.vS - (4*self.rel1pp*self.vS**2)/3. - (4*rel2pp*self.vS**2)/3. - (self.v**2*(remu11 - remu22 - 4*self.rel5p*self.vS)*np.cos(2*np.arctan(self.tb)))/(2.*self.vS) - 2*rel6p*self.v**2*np.sin(2*np.arctan(self.tb)) - 2*rel7p*self.v**2*np.sin(2*np.arctan(self.tb)) - (remu12*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS) - (remu21*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS))/4.
+        # -------- m55sq relation -----------
+        # remsp = (-self.m55sq - 2*self.rel5p*self.v**2 - (4*self.rel4p*self.v**2)/(1 + self.tb**2) - (remu11*self.v**2)/(2.*self.vS) - (remu22*self.v**2)/(2.*self.vS) - 3*remus1*self.vS - remus2*self.vS - (4*self.rel1pp*self.vS**2)/3. - (4*rel2pp*self.vS**2)/3. - (self.v**2*(remu11 - remu22 - 4*self.rel5p*self.vS)*np.cos(2*np.arctan(self.tb)))/(2.*self.vS) - 2*rel6p*self.v**2*np.sin(2*np.arctan(self.tb)) - 2*rel7p*self.v**2*np.sin(2*np.arctan(self.tb)) - (remu12*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS) - (remu21*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS))/4.
 
+        remus1 = -(4*self.remsp + self.m55sq + 2*self.rel5p*self.v**2 + (4*self.rel4p*self.v**2)/(1 + self.tb**2) + (remu11*self.v**2)/(2.*self.vS) + (remu22*self.v**2)/(2.*self.vS) + remus2*self.vS + (4*self.rel1pp*self.vS**2)/3. + (4*rel2pp*self.vS**2)/3. + (self.v**2*(remu11 - remu22 - 4*self.rel5p*self.vS)*np.cos(2*np.arctan(self.tb)))/(2.*self.vS) + 2*rel6p*self.v**2*np.sin(2*np.arctan(self.tb)) + 2*rel7p*self.v**2*np.sin(2*np.arctan(self.tb)) + (remu12*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS) + (remu21*self.v**2*np.sin(2*np.arctan(self.tb)))/(2.*self.vS))/(3*self.vS)
+
+
+        # -------- m33sq relation -----------
+        self.l3pp = ((3*remu11*self.v**2)/(1 + self.tb**2) + (3*remu12*self.tb*self.v**2)/(1 + self.tb**2) + (3*remu21*self.tb*self.v**2)/(1 + self.tb**2) + (3*remu22*self.tb**2*self.v**2)/(1 + self.tb**2) + 3*self.m33sq*self.vS - 3*remus1*self.vS**2 - 9*remus2*self.vS**2 - 2*self.rel1pp*self.vS**3 - 8*rel2pp*self.vS**3)/(6.*self.vS**3)
+
+        # -------- m14sq and m24sq relation -----------
         iml6 = (-2*self.m14sq*np.sqrt(1 + self.tb**2) - self.iml5*self.tb*self.v**2)/(2.*self.v**2)
         iml7 = (-2*self.m24sq*np.sqrt(1 + self.tb**2) - self.iml5*self.v**2)/(2.*self.tb*self.v**2)
 
+        # -------- m34sq relation -----------
         # iml3p = (-self.m34sq - immu12*self.v + immu21*self.v - 2*iml6p*self.v*self.vS + 2*iml7p*self.v*self.vS)/(2.*self.v*self.vS)
-        iml7p = iml3p + (self.m34sq + immu12*self.v - immu21*self.v )/(2.*self.v*self.vS)+ iml6p
+        # iml7p = iml3p + (self.m34sq + immu12*self.v - immu21*self.v )/(2.*self.v*self.vS)+ iml6p
+        immu12 = -(iml3p + (self.m34sq - immu21*self.v )/(2.*self.v*self.vS)+ iml6p-iml7p)*2*self.vS
 
+        # -------- m15sq and m25sq relation -----------
         iml4p = (-(self.m15sq*np.sqrt(1 + self.tb**2)) - 2*immu11*self.v - immu12*self.tb*self.v - immu21*self.tb*self.v - 2*iml6p*self.tb*self.v*self.vS - 2*iml7p*self.tb*self.v*self.vS)/(4.*self.v*self.vS)
         iml5p = (-(self.m25sq*np.sqrt(1 + self.tb**2)) - immu12*self.v - immu21*self.v - 2*immu22*self.tb*self.v - 2*iml6p*self.v*self.vS - 2*iml7p*self.v*self.vS)/(4.*self.tb*self.v*self.vS)
-        iml1pp = (6*immu11*self.v**2 + 6*immu22*self.tb**2*self.v**2 - 6*self.m35sq*self.vS - 6*self.m35sq*self.tb**2*self.vS - 6*immus1*self.vS**2 - 6*immus2*self.vS**2 - 6*immus1*self.tb**2*self.vS**2 - 6*immus2*self.tb**2*self.vS**2 - 8*iml2pp*self.vS**3 - 8*iml2pp*self.tb**2*self.vS**3 + 3*immu12*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu21*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu12*self.tb**2*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu21*self.tb**2*self.v**2*np.sin(2*np.arctan(self.tb)))/(4.*(1 + self.tb**2)*self.vS**3)
 
+        # -------- m35sq relation -----------
+        # iml1pp = (6*immu11*self.v**2 + 6*immu22*self.tb**2*self.v**2 - 6*self.m35sq*self.vS - 6*self.m35sq*self.tb**2*self.vS - 6*immus1*self.vS**2 - 6*immus2*self.vS**2 - 6*immus1*self.tb**2*self.vS**2 - 6*immus2*self.tb**2*self.vS**2 - 8*iml2pp*self.vS**3 - 8*iml2pp*self.tb**2*self.vS**3 + 3*immu12*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu21*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu12*self.tb**2*self.v**2*np.sin(2*np.arctan(self.tb)) + 3*immu21*self.tb**2*self.v**2*np.sin(2*np.arctan(self.tb)))/(4.*(1 + self.tb**2)*self.vS**3)
+        immus1 = -(4*self.iml1pp*(1 + self.tb**2)*self.vS**3 - 6*immu11*self.v**2 - 6*immu22*self.tb**2*self.v**2 + 6*self.m35sq*self.vS*(1 + self.tb**2) + 6*immus2*self.vS**2*(1 + self.tb**2) + 8*iml2pp*self.vS**3*(1 + self.tb**2) - 3*immu12*self.v**2*np.sin(2*np.arctan(self.tb))*(1 + self.tb**2) - 3*immu21*self.v**2*np.sin(2*np.arctan(self.tb))*(1 + self.tb**2)) / (6*self.vS**2*(1 + self.tb**2))
+
+        # -------- im_m12sq tadpole -----------
         imm12 = 1/2 * ((self.tb* self.iml5 + iml6 + self.tb**2 * iml7)*self.v**2/(1+self.tb**2) + 2*self.vS**2 * (iml3p + iml7p + iml6p) + 2*self.vS * (immu12-immu21))
-        immsp = -1/(6*(self.tb**2)*self.vS) *(6*(self.v**2)*self.vS*(iml4p +self.tb**2*iml5p + self.tb*(iml6p+iml7p) ) + (1+self.tb**2)*self.vS**3*(iml1pp+2*iml2pp) + 3*(self.v**2)*(immu11 + self.tb*immu12+self.tb*immu21 + self.tb**2 * immu22) + 3*(1+self.tb**2)*self.vS**2 * (immus1+immus2) )
+
+        # -------- im_msp tadpole -----------
+        immsp = -1/(6*(self.tb**2)*self.vS) *(6*(self.v**2)*self.vS*(iml4p +self.tb**2*iml5p + self.tb*(iml6p+iml7p) ) + (1+self.tb**2)*self.vS**3*(self.iml1pp+2*iml2pp) + 3*(self.v**2)*(immu11 + self.tb*immu12+self.tb*immu21 + self.tb**2 * immu22) + 3*(1+self.tb**2)*self.vS**2 * (immus1+immus2) )
 
         self.l5  = complex(rel5, self.iml5,    arg=-(-2*self.eta))
         self.l6  = complex(self.rel6, iml6,    arg=-(-1*self.eta))
         self.l7  = complex(self.rel7, iml7,    arg=-(-1*self.eta))
-        self.msp = complex(remsp, immsp,       arg=-(2*self.zeta)).Re()
+        self.msp = complex(self.remsp, immsp,       arg=-(2*self.zeta)).Re()
         self.m12 = complex(rem12, imm12,       arg=-(-1*self.eta)).Re()
-        self.l1pp= complex(self.rel1pp, iml1pp,arg=-(4*self.zeta))
+        self.l1pp= complex(self.rel1pp, self.iml1pp,arg=-(4*self.zeta))
         self.l4p = complex(self.rel4p, iml4p,  arg=-(2*self.zeta))
         self.l5p = complex(self.rel5p, iml5p,  arg=-(2*self.zeta))
-        self.l7p = complex(rel7p, iml7p,       arg=-(2*self.zeta+self.eta))
+        self.mu12 = complex(remu12, immu12,     arg=-(self.zeta - self.eta))
+        self.mus1 = complex(remus1, immus1,       arg=-(3*self.zeta))
+        # self.l7p = complex(rel7p, iml7p,       arg=-(2*self.zeta+self.eta))
         # self.l3p complexci(rel3p, iml3p,  -1*self.eta).imself.)
 # %%
 
