@@ -6,6 +6,8 @@ import lib.utilities as uti
 # import utilities as uti
 import numpy as np
 
+ompath = ''
+
 class channel:
     ww = ['Wm', 'Wp', 'anxs_ww']
     zz = ['Z', 'Z', 'anxs_zz']
@@ -18,6 +20,7 @@ def micromega_run(omg_dir, spc_dir):
     os.chdir(spc_dir)
     spc = glob.glob('SPheno.spc.*')[0]
     # print(spc)
+    ompath = omg_dir
     os.system(omg_dir+"CalcOmega_with_DDetection_MOv52 "+spc+" > omg.data")
  
     return 0
@@ -104,7 +107,7 @@ def anbr(lst_omg, channel):
 
 
 def dxs_check(m_dm, xs):
-    df = pd.read_csv('/data2/licheng/micromegas_5.2.13/SpinIndependentLimitandSensitivity.csv',sep='\s+')
+    df = pd.read_csv(ompath +'/SpinIndependentLimitandSensitivity.csv',sep='\s+')
     for i in range(len(df['mass'])):
         if i-1 < 0:
             k = 0
@@ -146,9 +149,9 @@ def xs_check(m, xs, dfm, dfxsb):
 
 
 def axs_check(m_dm, axs_ww,axs_zz,axs_hh):
-    dfww = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_WW.dat',sep='\s+',skiprows=[0],header=None)
-    dfZZ = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_ZZ.dat',sep='\s+',skiprows=[0],header=None)
-    dfhh = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_hh.dat',sep='\s+',skiprows=[0],header=None)
+    dfww = pd.read_csv(ompath + '/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_WW.dat',sep='\s+',skiprows=[0],header=None)
+    dfZZ = pd.read_csv(ompath + '/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_ZZ.dat',sep='\s+',skiprows=[0],header=None)
+    dfhh = pd.read_csv(ompath + '/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_hh.dat',sep='\s+',skiprows=[0],header=None)
     for i in range(len(dfww[0])):
         if i-1 < 0:
             k = 0
@@ -185,26 +188,26 @@ def omg_check(omgresult):
     elif not dxs_check(re_omg['m_dm'], re_omg['dm_xs_proton']):
         re_omg.update({'allow':False})
     else:
-        dfww = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_WW.dat',sep='\s+',skiprows=[0],header=None)
+        dfww = pd.read_csv(ompath+'/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_WW.dat',sep='\s+',skiprows=[0],header=None)
         # lst_o = uti.readfield(spc+'/omg.out')
         anxsww = re_omg['dm_ann_xs']*anbr(lst_o, channel.ww)
         if not xs_check(re_omg['m_dm'], anxsww, dfww[0], dfww[1]):
             re_omg.update({'dmdmww':anxsww,
                 'allow':False})
         else:
-            dfZZ = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_ZZ.dat',sep='\s+',skiprows=[0],header=None)
+            dfZZ = pd.read_csv(ompath+'/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_ZZ.dat',sep='\s+',skiprows=[0],header=None)
             anxszz = re_omg['dm_ann_xs']*anbr(lst_o, channel.zz)
             if not xs_check(re_omg['m_dm'], anxszz, dfZZ[0], dfZZ[1]):
                 re_omg.update({'dmdmzz':anxszz,
                     'allow':False})
             else:
-                dfhh = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_hh.dat',sep='\s+',skiprows=[0],header=None)
+                dfhh = pd.read_csv(ompath+'/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_hh.dat',sep='\s+',skiprows=[0],header=None)
                 anxshh = re_omg['dm_ann_xs']*anbr(lst_o, channel.hh)
                 if not xs_check(re_omg['m_dm'], anxshh, dfhh[0], dfhh[1]):
                     re_omg.update({'dmdmhh':anxshh,
                          'allow':False})
                 else:
-                    dfbb = pd.read_csv('/data2/licheng/micromegas_5.2.13/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_bb.dat',sep='\s+',skiprows=[0],header=None)
+                    dfbb = pd.read_csv(ompath+'/FermiLAT_limits_fromMadDM/MadDM_Fermi_Limit_bb.dat',sep='\s+',skiprows=[0],header=None)
                     anxsbb = re_omg['dm_ann_xs']*anbr(lst_o, channel.bb)
                     if not xs_check(re_omg['m_dm'], anxsbb, dfbb[0], dfbb[1]):
                         re_omg.update({'dmdmbb':anxsbb,
